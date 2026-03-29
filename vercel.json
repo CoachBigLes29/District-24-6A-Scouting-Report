@@ -1,6 +1,6 @@
 {
   "routes": [
-    { "src": "/dickinson", "dest": "/dickinson.html" },
-    { "src": "/", "dest": "/index.html" }
+    { "src": "/dickinson", "dest": "/dickinson_varsity_stats.html" },
+    { "src": "/", "dest": "/district_24_6a_hub.html" }
   ]
 }
