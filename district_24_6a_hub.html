@@ -4,12 +4,360 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>District 24-6A Baseball · Scouting Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:#07080d;color:#c8d0e0;font-family:sans-serif;}
+:root{--ink:#07080d;--deep:#0c0e17;--panel:#111420;--border:rgba(255,255,255,0.07);--muted:#3a3f57;--gray:#8892a4;--light:#c8d0e0;--white:#eef2f9;--gold:#e8a825;--gold2:#ffd166;--green:#00b894;--font-head:'Oswald',sans-serif;--font-ui:'Rajdhani',sans-serif;--font-body:'Source Serif 4',Georgia,serif;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--ink);color:var(--light);font-family:var(--font-body);min-height:100vh;overflow-x:hidden;}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:4rem 2rem 6rem;overflow:hidden;background:radial-gradient(ellipse 120% 60% at 50% 100%,rgba(232,168,37,.07) 0%,transparent 70%),linear-gradient(180deg,#07080d 0%,#0c101e 50%,#07080d 100%);}
+.hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(232,168,37,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(232,168,37,.04) 1px,transparent 1px);background-size:60px 60px;animation:gridDrift 20s linear infinite;}
+@keyframes gridDrift{0%{background-position:0 0;}100%{background-position:60px 60px;}}
+.hero-content{position:relative;z-index:2;max-width:800px;}
+.hero-eyebrow{font-family:var(--font-ui);font-size:.8rem;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:1.25rem;}
+.hero-eyebrow span{display:inline-block;padding:4px 14px;border:1px solid rgba(232,168,37,.3);border-radius:2px;background:rgba(232,168,37,.06);}
+.hero-title{font-family:var(--font-head);font-size:clamp(3.5rem,9vw,7.5rem);font-weight:700;line-height:.92;letter-spacing:-1px;color:var(--white);text-transform:uppercase;margin-bottom:.5rem;}
+.hero-title .accent{color:var(--gold);}
+.hero-subtitle{font-family:var(--font-head);font-size:clamp(1rem,2.5vw,1.6rem);font-weight:300;letter-spacing:6px;text-transform:uppercase;color:var(--gray);margin-bottom:2rem;}
+.hero-divider{width:80px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 2rem;}
+.hero-desc{font-style:italic;color:var(--gray);max-width:500px;margin:0 auto 2.5rem;line-height:1.8;}
+.hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-primary{font-family:var(--font-ui);font-size:.9rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:13px 30px;background:var(--gold);color:var(--ink);border:none;border-radius:3px;cursor:pointer;text-decoration:none;transition:all .2s;display:inline-block;}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-2px);}
+.btn-outline{font-family:var(--font-ui);font-size:.9rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:13px 30px;background:transparent;color:var(--light);border:1px solid rgba(255,255,255,.2);border-radius:3px;cursor:pointer;text-decoration:none;transition:all .2s;display:inline-block;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.ticker-wrap{background:var(--gold);overflow:hidden;padding:8px 0;}
+.ticker-inner{display:flex;animation:ticker 35s linear infinite;white-space:nowrap;}
+.ticker-item{font-family:var(--font-ui);font-size:.78rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);padding:0 2.5rem;display:flex;align-items:center;gap:8px;}
+.ticker-item::before{content:'◆';font-size:.5rem;opacity:.6;}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.main{max-width:1300px;margin:0 auto;padding:5rem 2rem;}
+.section-label{font-family:var(--font-ui);font-size:.72rem;font-weight:700;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;}
+.section-title{font-family:var(--font-head);font-size:clamp(2rem,4vw,3rem);font-weight:700;text-transform:uppercase;color:var(--white);letter-spacing:1px;line-height:1;margin-bottom:.5rem;}
+.section-rule{width:50px;height:3px;background:var(--gold);margin-bottom:2.5rem;border-radius:2px;}
+#standings{margin-bottom:6rem;}
+.sw{overflow-x:auto;border-radius:8px;border:1px solid var(--border);background:var(--panel);}
+.st{width:100%;border-collapse:collapse;font-family:var(--font-ui);font-size:.88rem;}
+.st thead tr:first-child th{background:rgba(232,168,37,.1);border-bottom:1px solid rgba(232,168,37,.2);padding:9px 12px;font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;white-space:nowrap;color:var(--gray);}
+.st thead tr:last-child th{background:rgba(15,25,50,.7);padding:7px 12px;font-size:.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gray);text-align:center;white-space:nowrap;border-bottom:2px solid rgba(232,168,37,.25);}
+.st thead .tl{text-align:left!important;padding-left:1rem!important;}
+.dh{color:var(--gold)!important;}.oh{color:#74b9ff!important;}
+.st tbody tr{border-bottom:1px solid rgba(255,255,255,.04);transition:background .15s;}
+.st tbody tr:hover{background:rgba(255,255,255,.03);}
+.st tbody tr.hl{background:rgba(37,99,235,.08);border-left:3px solid #2563eb;}
+.st tbody tr.sh td{background:rgba(232,168,37,.05);color:var(--gold);font-size:.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;}
+.st tbody tr.co{border-bottom:2px dashed rgba(232,168,37,.35)!important;}
+.st tfoot tr{background:rgba(232,168,37,.07);border-top:2px solid rgba(232,168,37,.25);}
+.st tfoot td{font-weight:700;font-size:.78rem;color:var(--gold);padding:10px 12px;text-align:center;}
+.st tfoot td.tl{text-align:left;padding-left:1rem;}
+.st td{padding:10px 12px;text-align:center;color:var(--light);white-space:nowrap;}
+.st td.tl{text-align:left;padding-left:1rem;}
+.rk{font-family:var(--font-head);font-size:.9rem;color:var(--muted);width:22px;display:inline-block;}
+.rk.t{color:var(--gold);}
+.sl{width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:.58rem;font-weight:700;color:#fff;margin:0 8px;vertical-align:middle;flex-shrink:0;}
+.sn{font-weight:700;color:var(--white);font-size:.9rem;}.sk{font-size:.7rem;color:var(--muted);margin-left:3px;}
+.sr{font-family:var(--font-head);font-size:.92rem;color:var(--white);}.sp{color:var(--gold);font-weight:600;}
+.sb{display:inline-block;padding:2px 7px;border-radius:3px;font-size:.7rem;font-weight:700;}
+.sw2{background:rgba(52,211,153,.12);color:#34d399;border:1px solid rgba(52,211,153,.25);}
+.sl2{background:rgba(248,113,113,.12);color:#f87171;border:1px solid rgba(248,113,113,.25);}
+.rl{font-size:.68rem;font-weight:700;color:var(--gold);text-decoration:none;padding:2px 7px;border:1px solid rgba(232,168,37,.3);border-radius:3px;}
+.rl:hover{background:rgba(232,168,37,.1);}
+.rs{font-size:.68rem;color:var(--muted);}
+.stn{font-family:var(--font-ui);font-size:.7rem;color:var(--muted);padding:8px 14px;text-align:right;border-top:1px solid var(--border);}
+#teams{margin-bottom:6rem;}
+.teams-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;}
+.team-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;overflow:hidden;text-decoration:none;display:block;transition:border-color .25s,transform .25s,box-shadow .25s;cursor:pointer;}
+.team-card:hover{border-color:rgba(232,168,37,.4);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4);}
+.tc-accent{height:3px;width:100%;}
+.tc-body{padding:1.25rem 1.4rem 1.4rem;}
+.tc-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem;}
+.team-info h3{font-family:var(--font-head);font-size:1.15rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--white);line-height:1.1;}
+.team-info .tnick{font-family:var(--font-ui);font-size:.75rem;letter-spacing:1px;color:var(--gray);text-transform:uppercase;}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:1rem;}
+.stat-cell{padding:8px 0;text-align:center;border-right:1px solid var(--border);}
+.stat-cell:last-child{border-right:none;}
+.stat-val{font-family:var(--font-head);font-size:1.4rem;font-weight:600;color:var(--white);line-height:1;display:block;}
+.stat-lbl{font-family:var(--font-ui);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);display:block;margin-top:2px;}
+.tc-footer{display:flex;justify-content:space-between;align-items:center;}
+.tstatus{font-family:var(--font-ui);font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:3px;}
+.s-live{background:rgba(0,184,148,.15);color:var(--green);border:1px solid rgba(0,184,148,.3);}
+.s-coming{background:rgba(9,132,227,.12);color:#74b9ff;border:1px solid rgba(9,132,227,.25);}
+.tla{font-family:var(--font-ui);font-size:.75rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:5px;transition:gap .2s;}
+.team-card:hover .tla{gap:10px;}
+#leaders{margin-bottom:6rem;}
+.lc{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:3rem 2rem;text-align:center;}
+.lc h3{font-family:var(--font-head);font-size:1.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--white);margin-bottom:.75rem;}
+.lc p{font-style:italic;color:var(--gray);max-width:500px;margin:0 auto 1.5rem;line-height:1.7;}
+.lph-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.75rem;max-width:800px;margin:0 auto;}
+.lph-card{background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.1);border-radius:6px;padding:1rem;text-align:center;}
+.lph-stat{font-family:var(--font-head);font-size:2rem;color:rgba(232,168,37,.3);margin-bottom:4px;}
+.lph-lbl{font-family:var(--font-ui);font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);}
+#about{margin-bottom:6rem;display:grid;grid-template-columns:1fr 1fr;gap:3rem;}
+@media(max-width:768px){#about{grid-template-columns:1fr;}}
+.about-text p{line-height:1.85;color:var(--gray);margin-bottom:1.2rem;}
+.about-text p strong{color:var(--light);}
+.about-list{list-style:none;}
+.about-list li{font-family:var(--font-ui);font-size:.9rem;color:var(--light);padding:10px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;}
+.about-list li::before{content:'';width:6px;height:6px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+footer{background:var(--panel);border-top:1px solid var(--border);padding:2.5rem 2rem;}
+.fi{max-width:1300px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.fb{font-family:var(--font-head);font-size:1.1rem;letter-spacing:2px;text-transform:uppercase;color:var(--white);}
+.fb span{color:var(--gold);}
+.fm{font-family:var(--font-ui);font-size:.75rem;letter-spacing:1px;color:var(--muted);}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+@media(max-width:600px){.teams-grid{grid-template-columns:1fr;}.hero-cta{flex-direction:column;align-items:center;}}
 </style>
 </head>
 <body>
-<h1 style="color:#e8a825;text-align:center;padding:2rem">LOADING...</h1>
-<script>window.location.reload();</script>
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span>UIL 6A · Region III · Texas</span></div>
+    <h1 class="hero-title">District<br><span class="accent">24-6A</span></h1>
+    <p class="hero-subtitle">Baseball Scouting Hub · Spring 2026</p>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">Independent scouting reports, stat breakdowns, and team profiles for every squad in the district — built from box score data, film, and analysis.</p>
+    <div class="hero-cta">
+      <a href="#standings" class="btn-primary">District Standings</a>
+      <a href="#teams" class="btn-outline">All Teams</a>
+    </div>
+  </div>
+</section>
+
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item">Dickinson Gators — 14W · 5L · 1T · Dist 4-2</span>
+    <span class="ticker-item">Clear Creek Wildcats — 13-4 · Dist 3-1 · #1</span>
+    <span class="ticker-item">Clear Lake Falcons — 12-10-2 · Dist 3-3</span>
+    <span class="ticker-item">Clear Springs Chargers — 10-10-2 · Dist 3-3</span>
+    <span class="ticker-item">Deer Park Deer — 6-9-3 · Dist 2-2</span>
+    <span class="ticker-item">Brazoswood Buccaneers — 11-8 · Dist 2-2</span>
+    <span class="ticker-item">Clear Brook Wolverines — 5-19 · Dist 1-5</span>
+    <span class="ticker-item">Clear Falls Knights — 5-7 · Dist 0-1</span>
+    <span class="ticker-item">District 24-6A · Region III · Spring 2026</span>
+    <span class="ticker-item">Dickinson Gators — 14W · 5L · 1T · Dist 4-2</span>
+    <span class="ticker-item">Clear Creek Wildcats — 13-4 · Dist 3-1 · #1</span>
+    <span class="ticker-item">Clear Lake Falcons — 12-10-2 · Dist 3-3</span>
+    <span class="ticker-item">Clear Springs Chargers — 10-10-2 · Dist 3-3</span>
+    <span class="ticker-item">Deer Park Deer — 6-9-3 · Dist 2-2</span>
+    <span class="ticker-item">Brazoswood Buccaneers — 11-8 · Dist 2-2</span>
+    <span class="ticker-item">Clear Brook Wolverines — 5-19 · Dist 1-5</span>
+    <span class="ticker-item">Clear Falls Knights — 5-7 · Dist 0-1</span>
+    <span class="ticker-item">District 24-6A · Region III · Spring 2026</span>
+  </div>
+</div>
+
+<main class="main">
+  <section id="standings">
+    <div class="reveal">
+      <div class="section-label">As of March 30, 2026</div>
+      <h2 class="section-title">District Standings</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="sw reveal">
+      <table class="st">
+        <thead>
+          <tr>
+            <th style="width:36px">#</th>
+            <th class="tl" colspan="2">Team</th>
+            <th colspan="4" class="dh">— District —</th>
+            <th colspan="4" class="oh">— Overall —</th>
+            <th>Streak</th><th>Report</th>
+          </tr>
+          <tr>
+            <th></th><th class="tl" colspan="2"></th>
+            <th>W-L-T</th><th>PCT</th><th>RF</th><th>RA</th>
+            <th>W-L-T</th><th>PCT</th><th>RF</th><th>RA</th>
+            <th>Streak</th><th>Report</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="sh"><td colspan="13">⚡ PLAYOFF POSITIONS — Top 4 Advance</td></tr>
+          <tr>
+            <td><span class="rk t">1</span></td>
+            <td class="tl" colspan="2"><span class="sl" style="background:#006633">CRK</span><span class="sn">Clear Creek</span><span class="sk">Wildcats</span></td>
+            <td><span class="sr">3-1</span></td><td class="sp">.750</td><td>11</td><td>5</td>
+            <td><span class="sr">13-4</span></td><td class="sp">.765</td><td>78</td><td>38</td>
+            <td><span class="sb sw2">3W</span></td><td><span class="rs">Coming Soon</span></td>
+          </tr>
+          <tr class="hl">
+            <td><span class="rk t">2</span></td>
+            <td class="tl" colspan="2"><span class="sl" style="background:#1a3a6e">DHS</span><span class="sn">Dickinson</span><span class="sk">Gators</span></td>
+            <td><span class="sr">4-2</span></td><td class="sp">.667</td><td>16</td><td>8</td>
+            <td><span class="sr">14-5-1</span></td><td class="sp">.725</td><td>115</td><td>50</td>
+            <td><span class="sb sl2">1L</span></td><td><a href="/dickinson" class="rl" target="_blank">View Report ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="rk t">3</span></td>
+            <td class="tl" colspan="2"><span class="sl" style="background:#003087">CLK</span><span class="sn">Clear Lake</span><span class="sk">Falcons</span></td>
+            <td><span class="sr">3-3</span></td><td class="sp">.500</td><td>22</td><td>20</td>
+            <td><span class="sr">12-10-2</span></td><td class="sp">.542</td><td>117</td><td>88</td>
+            <td><span class="sb sw2">1W</span></td><td><span class="rs">Coming Soon</span></td>
+          </tr>
+          <tr class="co">
+            <td><span class="rk t">4</span></td>
+            <td class="tl" colspan="2"><span class="sl" style="background:#002855">CSP</span><span class="sn">Clear Springs</span><span class="sk">Chargers</span></td>
+            <td><span class="sr">3-3</span></td><td class="sp">.500</td><td>49</td><td>32</td>
+            <td><span class="sr">10-10-2</span></td><td class="sp">.500</td><td>156</td><td>133</td>
+            <td><span class="sb sl2">1L</span></td><td><span class="rs">Coming Soon</span></td>
+          </tr>
+          <tr class="sh"><td colspan="13">▾ OUT OF PLAYOFF POSITION</td></tr>
+          <tr>
+            <td><span class="rk">5</span></td>
+            <td class="tl" colspan="2"><span class="sl" style="background:#8b1a1a">DPK</span><span class="sn">Deer Park</span><span class="sk">Deer</span></td>
+            <td><span class="sr">2-2</span></td><td class="sp">.500</td><td>11</td><td>12</td>
+            <td><span class="sr">6-9-3</span></td><td class="sp">.417</td><td>68</td><td>81</td>
+            <td><span class="sb sw2">2W</span></td><td><span class="rs">Coming Soon</span></td>
+          </tr>
+          <tr>
+            <td><span class="rk">6</span></td>
+            <td class="tl" colspan="2"><span class="sl" style="background:#003f87">BZW</span><span class="sn">Brazoswood</span><span class="sk">Buccaneers</span></td>
+            <td><span class="sr">2-2</span></td><td class="sp">.500</td><td>14</td><td>20</td>
+            <td><span class="sr">11-8</span></td><td class="sp">.579</td><td>112</td><td>72</td>
+            <td><span class="sb sw2">1W</span></td><td><span class="rs">Coming Soon</span></td>
+          </tr>
+          <tr>
+            <td><span class="rk">7</span></td>
+            <td class="tl" colspan="2"><span class="sl" style="background:#6b0000">CBK</span><span class="sn">Clear Brook</span><span class="sk">Wolverines</span></td>
+            <td><span class="sr">1-5</span></td><td class="sp">.167</td><td>17</td><td>43</td>
+            <td><span class="sr">5-19</span></td><td class="sp">.208</td><td>86</td><td>189</td>
+            <td><span class="sb sl2">4L</span></td><td><span class="rs">Coming Soon</span></td>
+          </tr>
+          <tr>
+            <td><span class="rk">8</span></td>
+            <td class="tl" colspan="2"><span class="sl" style="background:#1c2951">CFL</span><span class="sn">Clear Falls</span><span class="sk">Knights</span></td>
+            <td><span class="sr">0-1</span></td><td class="sp">.000</td><td>0</td><td>7</td>
+            <td><span class="sr">5-7</span></td><td class="sp">.417</td><td>36</td><td>53</td>
+            <td><span class="sb sl2">1L</span></td><td><span class="rs">Coming Soon</span></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="tl" colspan="3">DISTRICT TOTALS</td>
+            <td>18-18-0</td><td>—</td><td>140</td><td>147</td>
+            <td>77-62-10</td><td>—</td><td>768</td><td>704</td>
+            <td colspan="2">Through 3/30/2026</td>
+          </tr>
+        </tfoot>
+      </table>
+      <div class="stn">🕒 Updated: March 30, 2026 · MaxPreps / UIL 24-6A · Blue = Dickinson · Dashed = Playoff cutoff</div>
+    </div>
+  </section>
+
+  <section id="teams">
+    <div class="reveal">
+      <div class="section-label">2025-26 Alignment</div>
+      <h2 class="section-title">District Teams</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="teams-grid" id="teams-grid"></div>
+  </section>
+
+  <section id="leaders">
+    <div class="reveal">
+      <div class="section-label">Across All 8 Schools</div>
+      <h2 class="section-title">District Leaders</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="lc reveal">
+      <h3>Coming Soon</h3>
+      <p>District-wide stat leaders will populate here as scouting reports are completed. AVG, OPS, ERA, Ks, RBI, and more.</p>
+      <div class="lph-grid">
+        <div class="lph-card"><div class="lph-stat">—</div><div class="lph-lbl">AVG Leader</div></div>
+        <div class="lph-card"><div class="lph-stat">—</div><div class="lph-lbl">OPS Leader</div></div>
+        <div class="lph-card"><div class="lph-stat">—</div><div class="lph-lbl">HR Leader</div></div>
+        <div class="lph-card"><div class="lph-stat">—</div><div class="lph-lbl">RBI Leader</div></div>
+        <div class="lph-card"><div class="lph-stat">—</div><div class="lph-lbl">ERA Leader</div></div>
+        <div class="lph-card"><div class="lph-stat">—</div><div class="lph-lbl">K Leader (P)</div></div>
+        <div class="lph-card"><div class="lph-stat">—</div><div class="lph-lbl">WHIP Leader</div></div>
+        <div class="lph-card"><div class="lph-stat">—</div><div class="lph-lbl">SB Leader</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="reveal">
+      <div class="section-label">The Process</div>
+      <h2 class="section-title">How We Scout</h2>
+      <div class="section-rule"></div>
+      <div class="about-text">
+        <p>Every report is built from <strong>raw box score data</strong> — at-bats, hits, strikeouts, walks, earned runs — compiled game by game across the full season.</p>
+        <p>Player cards include <strong>scouting grades</strong> (S through D) across five tools: Contact, Power, Plate Discipline, Speed, and Overall.</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="section-label">What's Tracked</div>
+      <h2 class="section-title" style="font-size:1.8rem">Stat Glossary</h2>
+      <div class="section-rule"></div>
+      <ul class="about-list">
+        <li>PA — Plate Appearances (AB + BB + HBP + SF)</li>
+        <li>AVG — Batting Average (H ÷ AB)</li>
+        <li>OBP — On-Base Percentage</li>
+        <li>SLG — Slugging Percentage (TB ÷ AB)</li>
+        <li>OPS — On-Base + Slugging</li>
+        <li>ERA — Earned Run Average (ER ÷ IP × 9)</li>
+        <li>WHIP — Walks + Hits per Inning Pitched</li>
+        <li>SB — Stolen Bases</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="fi">
+    <div class="fb">District <span>24-6A</span> Baseball Scouting</div>
+    <div class="fm">UIL 6A · Region III · Spring 2026 · Independent Analysis</div>
+  </div>
+</footer>
+
+<script>
+const TEAMS = [
+  {name:"Dickinson",nickname:"Gators",colors:["#1a3a6e","#c8102e"],record:"14-5-1",distRecord:"4-2",distPct:".667",rank:2,streak:"1L",status:"live",statusLabel:"Report Live",link:"/dickinson",reported:true},
+  {name:"Clear Creek",nickname:"Wildcats",colors:["#006633","#ffffff"],record:"13-4",distRecord:"3-1",distPct:".750",rank:1,streak:"3W",status:"coming",statusLabel:"Report Pending",link:null,reported:false},
+  {name:"Clear Lake",nickname:"Falcons",colors:["#003087","#c8a832"],record:"12-10-2",distRecord:"3-3",distPct:".500",rank:3,streak:"1W",status:"coming",statusLabel:"Report Pending",link:null,reported:false},
+  {name:"Clear Springs",nickname:"Chargers",colors:["#002855","#c8102e"],record:"10-10-2",distRecord:"3-3",distPct:".500",rank:4,streak:"1L",status:"coming",statusLabel:"Report Pending",link:null,reported:false},
+  {name:"Deer Park",nickname:"Deer",colors:["#8b1a1a","#f5a623"],record:"6-9-3",distRecord:"2-2",distPct:".500",rank:5,streak:"2W",status:"coming",statusLabel:"Report Pending",link:null,reported:false},
+  {name:"Brazoswood",nickname:"Buccaneers",colors:["#003f87","#c8102e"],record:"11-8",distRecord:"2-2",distPct:".500",rank:6,streak:"1W",status:"coming",statusLabel:"Report Pending",link:null,reported:false},
+  {name:"Clear Brook",nickname:"Wolverines",colors:["#6b0000","#c0c0c0"],record:"5-19",distRecord:"1-5",distPct:".167",rank:7,streak:"4L",status:"coming",statusLabel:"Report Pending",link:null,reported:false},
+  {name:"Clear Falls",nickname:"Knights",colors:["#1c2951","#c8102e"],record:"5-7",distRecord:"0-1",distPct:".000",rank:8,streak:"1L",status:"coming",statusLabel:"Report Pending",link:null,reported:false}
+];
+function buildTeams(){
+  const grid=document.getElementById('teams-grid');
+  TEAMS.forEach((t,i)=>{
+    const card=document.createElement(t.link?'a':'div');
+    if(t.link){card.href=t.link;card.target='_blank';}
+    card.className='team-card reveal';
+    card.style.animationDelay=(i*.05)+'s';
+    const [c1,c2]=t.colors;
+    const sc=t.streak.includes('W')?'#00b894':'#d63031';
+    card.innerHTML=`<div class="tc-accent" style="background:linear-gradient(90deg,${c1},${c2})"></div>
+      <div class="tc-body">
+        <div class="tc-header">
+          <div style="width:36px;height:36px;border-radius:4px;display:flex;align-items:center;justify-content:center;background:${c1}25;border:1px solid ${c1}50;color:${c2};font-family:var(--font-head);font-size:1.1rem;font-weight:700;flex-shrink:0">${t.rank}</div>
+          <div class="team-info" style="flex:1"><h3>${t.name}</h3><div class="tnick">${t.nickname}</div></div>
+          <div style="font-family:var(--font-ui);font-size:.75rem;font-weight:700;color:${sc};letter-spacing:1px;background:${sc}18;border:1px solid ${sc}35;padding:3px 8px;border-radius:3px;flex-shrink:0">${t.streak}</div>
+        </div>
+        <div class="stats-row">
+          <div class="stat-cell"><span class="stat-val" style="color:${t.reported?'#e8a825':'#c8d0e0'}">${t.record}</span><span class="stat-lbl">Overall</span></div>
+          <div class="stat-cell"><span class="stat-val" style="color:${t.reported?'#e8a825':'#c8d0e0'}">${t.distRecord}</span><span class="stat-lbl">District</span></div>
+          <div class="stat-cell"><span class="stat-val" style="color:${t.reported?'#e8a825':'#c8d0e0'}">${t.distPct}</span><span class="stat-lbl">Dist PCT</span></div>
+        </div>
+        <div class="tc-footer">
+          <span class="tstatus s-${t.status}">${t.statusLabel}</span>
+          ${t.link?'<span class="tla">View Report →</span>':'<span style="font-family:var(--font-ui);font-size:.72rem;color:var(--muted)">Scouting report in progress</span>'}
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+function initReveal(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}});
+  },{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}
+buildTeams();
+setTimeout(initReveal,100);
+</script>
 </body>
 </html>
