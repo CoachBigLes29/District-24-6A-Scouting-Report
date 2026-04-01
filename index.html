@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>District 24-6A Baseball · Scouting Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Rajdhani:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #07080d;
+  --deep:   #0c0e17;
+  --panel:  #111420;
+  --raised: #171b2a;
+  --border: rgba(255,255,255,0.07);
+  --muted:  #3a3f57;
+  --gray:   #8892a4;
+  --light:  #c8d0e0;
+  --white:  #eef2f9;
+  --gold:   #e8a825;
+  --gold2:  #ffd166;
+  --red:    #d63031;
+  --green:  #00b894;
+  --blue:   #0984e3;
+  --accent: #e8a825;
+  --font-head: 'Oswald', sans-serif;
+  --font-ui:   'Rajdhani', sans-serif;
+  --font-body: 'Source Serif 4', Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--light);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE OVERLAY ─────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.6;
+}
+
+/* ── HERO ──────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem 6rem;
+  overflow: hidden;
+}
+
+/* Diamond field background pattern */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 100%, rgba(232,168,37,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 80% at 50% 50%, rgba(9,132,227,0.04) 0%, transparent 60%),
+    linear-gradient(180deg, #07080d 0%, #0c101e 50%, #07080d 100%);
+}
+
+/* Animated grid lines */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(232,168,37,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232,168,37,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+  animation: gridDrift 20s linear infinite;
+}
+
+@keyframes gridDrift {
+  0%   { background-position: 0 0; }
+  100% { background-position: 60px 60px; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.25rem;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.2s forwards;
+}
+
+.hero-eyebrow span {
+  display: inline-block;
+  padding: 4px 14px;
+  border: 1px solid rgba(232,168,37,0.3);
+  border-radius: 2px;
+  background: rgba(232,168,37,0.06);
+}
+
+.hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(3.5rem, 9vw, 7.5rem);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -1px;
+  color: var(--white);
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.35s forwards;
+}
+
+.hero-title .accent { color: var(--gold); }
+
+.hero-subtitle {
+  font-family: var(--font-head);
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  font-weight: 300;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.5s forwards;
+}
+
+.hero-divider {
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 0 auto 2.5rem;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.6s forwards;
+}
+
+.hero-desc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--gray);
+  max-width: 500px;
+  margin: 0 auto 3rem;
+  line-height: 1.8;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.7s forwards;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.7s 0.85s forwards;
+}
+
+.btn-primary {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 13px 30px;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background: var(--gold2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(232,168,37,0.3);
+}
+
+.btn-outline {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 13px 30px;
+  background: transparent;
+  color: var(--light);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 3px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block;
+}
+
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  z-index: 2;
+  opacity: 0;
+  animation: fadeUp 0.7s 1.2s forwards;
+}
+
+.scroll-hint span {
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.scroll-arrow {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg, var(--muted), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* ── STATS TICKER ──────────────────────────────────────── */
+.ticker-wrap {
+  background: var(--gold);
+  overflow: hidden;
+  padding: 8px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.ticker-inner {
+  display: flex;
+  animation: ticker 30s linear infinite;
+  white-space: nowrap;
+}
+
+.ticker-item {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--ink);
+  padding: 0 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ticker-item::before {
+  content: '◆';
+  font-size: 0.5rem;
+  opacity: 0.6;
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── MAIN LAYOUT ────────────────────────────────────────── */
+.main {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+/* Section Headers */
+.section-label {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.6rem;
+}
+
+.section-title {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--white);
+  letter-spacing: 1px;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.section-rule {
+  width: 50px;
+  height: 3px;
+  background: var(--gold);
+  margin-bottom: 2.5rem;
+  border-radius: 2px;
+}
+
+/* ── TEAMS GRID ─────────────────────────────────────────── */
+#teams { margin-bottom: 6rem; }
+
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.team-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+  display: block;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+}
+
+.team-card:hover {
+  border-color: rgba(232,168,37,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(232,168,37,0.1);
+}
+
+.team-card-accent {
+  height: 3px;
+  width: 100%;
+}
+
+.team-card-body {
+  padding: 1.25rem 1.4rem 1.4rem;
+}
+
+.team-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.team-logo-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  color: var(--white);
+  border: 2px solid rgba(255,255,255,0.1);
+}
+
+.team-info h3 {
+  font-family: var(--font-head);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--white);
+  line-height: 1.1;
+}
+
+.team-info .team-nickname {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+.team-stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.team-stat-cell {
+  padding: 8px 0;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+
+.team-stat-cell:last-child { border-right: none; }
+
+.team-stat-val {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1;
+  display: block;
+}
+
+.team-stat-label {
+  font-family: var(--font-ui);
+  font-size: 0.62rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.team-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team-status {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 3px;
+}
+
+.status-live    { background: rgba(0,184,148,0.15); color: var(--green); border: 1px solid rgba(0,184,148,0.3); }
+.status-coming  { background: rgba(9,132,227,0.12); color: #74b9ff; border: 1px solid rgba(9,132,227,0.25); }
+.status-pending { background: rgba(58,63,87,0.4); color: var(--gray); border: 1px solid var(--border); }
+
+.team-link-arrow {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: gap 0.2s;
+}
+
+.team-card:hover .team-link-arrow { gap: 10px; }
+
+/* ── DISTRICT LEADERS SECTION ───────────────────────────── */
+#leaders { margin-bottom: 6rem; }
+
+.leaders-coming {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.leaders-coming .icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.leaders-coming h3 {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+}
+
+.leaders-coming p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--gray);
+  max-width: 500px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.7;
+}
+
+.leader-placeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 0.75rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.leader-ph-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed rgba(255,255,255,0.1);
+  border-radius: 6px;
+  padding: 1rem;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.leader-ph-card:hover { border-color: rgba(232,168,37,0.3); }
+
+.leader-ph-stat {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  color: rgba(232,168,37,0.3);
+  margin-bottom: 4px;
+}
+
+.leader-ph-label {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── ABOUT / METHODOLOGY ────────────────────────────────── */
+#about {
+  margin-bottom: 6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  #about { grid-template-columns: 1fr; }
+  #teams { margin-bottom: 4rem; }
+}
+
+.about-text p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--gray);
+  margin-bottom: 1.2rem;
+}
+
+.about-text p strong { color: var(--light); font-style: normal; }
+
+.about-list {
+  list-style: none;
+}
+
+.about-list li {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--light);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.about-list li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── FOOTER ─────────────────────────────────────────────── */
+footer {
+  background: var(--panel);
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.footer-inner {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-brand {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.footer-brand span { color: var(--gold); }
+
+.footer-meta {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+/* ── ANIMATIONS ─────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .teams-grid { grid-template-columns: 1fr; }
+  .hero-cta { flex-direction: column; align-items: center; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .leader-placeholder-grid { grid-template-columns: repeat(2,1fr); }
+}
+
+  /* ── STANDINGS TABLE ─────────────────────────────────── */
+  #standings { margin-bottom: 6rem; }
+
+  .standings-table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.07);
+    background: var(--panel);
+  }
+
+  .standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-ui);
+    font-size: 0.9rem;
+  }
+
+  .standings-table thead tr {
+    background: rgba(232,168,37,0.08);
+    border-bottom: 2px solid rgba(232,168,37,0.25);
+  }
+
+  .standings-table thead th {
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray);
+    white-space: nowrap;
+    cursor: default;
+  }
+
+  .standings-table thead th.col-team { text-align: left; padding-left: 20px; }
+
+  .standings-table thead th .col-tip {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    text-transform: none;
+    margin-top: 1px;
+  }
+
+  .standings-table tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+
+  .standings-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+  .standings-table tbody tr:last-child { border-bottom: none; }
+
+  .standings-table tbody tr.standings-divider {
+    border-bottom: 2px dashed rgba(232,168,37,0.2);
+  }
+
+  .standings-table td {
+    padding: 13px 16px;
+    text-align: center;
+    color: var(--gray);
+    white-space: nowrap;
+  }
+
+  .standings-table td.col-team {
+    text-align: left;
+    padding-left: 20px;
+  }
+
+  .standings-rank {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    color: var(--muted);
+    width: 28px;
+    display: inline-block;
+  }
+
+  .standings-rank.top { color: var(--gold); }
+
+  .standings-team-name {
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+
+  .standings-team-nick {
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .standings-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-head);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #fff;
+    margin-right: 10px;
+    vertical-align: middle;
+    flex-shrink: 0;
+  }
+
+  .standings-record {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    color: var(--white);
+  }
+
+  .standings-pct {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    color: var(--light);
+  }
+
+  .standings-streak {
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+
+  .streak-w { background: rgba(0,184,148,0.15); color: var(--green); }
+  .streak-l { background: rgba(214,48,49,0.15); color: #e17055; }
+
+  .standings-section-header {
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  }
+
+  .standings-section-header td {
+    font-family: var(--font-ui);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 6px 20px;
+  }
+
+  .playoff-line td { border-bottom: 2px solid rgba(232,168,37,0.4) !important; }
+  .playoff-line td::after { content: ''; }
+
+  .standings-table tfoot tr {
+    background: rgba(232,168,37,0.05);
+    border-top: 2px solid rgba(232,168,37,0.2);
+  }
+
+  .standings-table tfoot td {
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: 0.82rem;
+    color: var(--gold);
+    letter-spacing: 0.5px;
+    padding: 12px 16px;
+  }
+
+  .standings-updated {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-top: 0.75rem;
+    text-align: right;
+  }
+
+  .report-link {
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--gold);
+    text-decoration: none;
+    padding: 2px 8px;
+    border: 1px solid rgba(232,168,37,0.3);
+    border-radius: 3px;
+    transition: all 0.15s;
+  }
+
+  .report-link:hover {
+    background: rgba(232,168,37,0.1);
+    color: var(--gold2);
+  }
+
+  .report-pending {
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── STANDINGS TABLE ──────────────────────────── */
+  #standings { margin-bottom: 6rem; }
+  .standings-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); background: var(--panel); }
+  .standings-table { width: 100%; border-collapse: collapse; font-family: var(--font-ui); font-size: 0.88rem; }
+  .standings-table thead tr:first-child th { background: rgba(232,168,37,0.1); border-bottom: 1px solid rgba(232,168,37,0.2); padding: 9px 12px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; text-align: center; white-space: nowrap; }
+  .standings-table thead tr:last-child th { background: rgba(15,25,50,0.7); padding: 7px 12px; font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); text-align: center; white-space: nowrap; border-bottom: 2px solid rgba(232,168,37,0.25); }
+  .standings-table thead .col-team { text-align: left !important; padding-left: 1rem !important; }
+  .dist-hdr { color: var(--gold) !important; }
+  .ovr-hdr { color: #74b9ff !important; }
+  .standings-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.15s; }
+  .standings-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+  .standings-table tbody tr:last-child { border-bottom: none; }
+  .standings-table tbody tr.hl { background: rgba(37,99,235,0.08); border-left: 3px solid #2563eb; }
+  .standings-table tbody tr.hl:hover { background: rgba(37,99,235,0.13); }
+  .standings-table tbody tr.sec-hdr td { background: rgba(232,168,37,0.05); color: var(--gold); font-size: 0.62rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-top: 1px solid rgba(232,168,37,0.12); }
+  .standings-table tbody tr.cutoff { border-bottom: 2px dashed rgba(232,168,37,0.35) !important; }
+  .standings-table tfoot tr { background: rgba(232,168,37,0.07); border-top: 2px solid rgba(232,168,37,0.25); }
+  .standings-table tfoot td { font-weight: 700; font-size: 0.78rem; color: var(--gold); padding: 10px 12px; text-align: center; }
+  .standings-table tfoot td.col-team { text-align: left; padding-left: 1rem; }
+  .standings-table td { padding: 10px 12px; text-align: center; color: var(--light); white-space: nowrap; }
+  .standings-table td.col-team { text-align: left; padding-left: 1rem; }
+  .st-rank { font-family: var(--font-head); font-size: 0.9rem; color: var(--muted); width: 22px; display: inline-block; }
+  .st-rank.top { color: var(--gold); }
+  .st-logo { width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-head); font-size: 0.58rem; font-weight: 700; color: #fff; margin: 0 8px; vertical-align: middle; flex-shrink: 0; }
+  .st-name { font-weight: 700; color: var(--white); font-size: 0.9rem; }
+  .st-nick { font-size: 0.7rem; color: var(--muted); margin-left: 3px; }
+  .st-rec { font-family: var(--font-head); font-size: 0.92rem; color: var(--white); }
+  .st-pct { color: var(--gold); font-weight: 600; }
+  .st-badge { display: inline-block; padding: 2px 7px; border-radius: 3px; font-size: 0.7rem; font-weight: 700; }
+  .st-w { background: rgba(52,211,153,0.12); color: #34d399; border: 1px solid rgba(52,211,153,0.25); }
+  .st-l { background: rgba(248,113,113,0.12); color: #f87171; border: 1px solid rgba(248,113,113,0.25); }
+  .st-link { font-size: 0.68rem; font-weight: 700; color: var(--gold); text-decoration: none; padding: 2px 7px; border: 1px solid rgba(232,168,37,0.3); border-radius: 3px; transition: background 0.15s; }
+  .st-link:hover { background: rgba(232,168,37,0.1); }
+  .st-soon { font-size: 0.68rem; color: var(--muted); }
+  .st-note { font-family: var(--font-ui); font-size: 0.7rem; color: var(--muted); padding: 8px 14px; text-align: right; border-top: 1px solid var(--border); }
+
+</style>
+</head>
+<body>
+
+<!-- ── HERO ─────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span>UIL 6A · Region III · Texas</span></div>
+    <h1 class="hero-title">District<br><span class="accent">24-6A</span></h1>
+    <p class="hero-subtitle">Baseball Scouting Hub · Spring 2026</p>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">Independent scouting reports, stat breakdowns, and team profiles for every squad in the district — built from box score data, film, and analysis.</p>
+    <div class="hero-cta">
+      <a href="#standings" class="btn-primary">District Standings</a>
+      <a href="#teams" class="btn-outline">All Teams</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ── TICKER ─────────────────────────────────────────────── -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item">Dickinson Gators — 14W · 5L · 1T · #2 District · Report Live</span>
+    <span class="ticker-item">Clear Creek Wildcats — 17W · 5L · #1 District · Report Live</span>
+    <span class="ticker-item">C. Munoz (DHS) — .450 AVG · 4 HR · 14 RBI · 1.285 OPS</span>
+    <span class="ticker-item">B. Chadwick (DHS) — 7W · 0L · 0.90 ERA · 40 IP</span>
+    <span class="ticker-item">I. Ramirez (DHS) — 56 K · 14.4 K/9 · 2.06 ERA</span>
+    <span class="ticker-item">Z. Clark (CRK) — .373 AVG · 41 K · 1.74 ERA · 11.9 K/9</span>
+    <span class="ticker-item">T. Prappas (CRK) — .521 OBP · 14 BB · 0.87 ERA</span>
+    <span class="ticker-item">T. Sauers (CRK) — 19 SB · 3-0 · 0.52 WHIP</span>
+    <span class="ticker-item">District 24-6A · Region III · Spring 2026</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item">Dickinson Gators — 14W · 5L · 1T · #2 District · Report Live</span>
+    <span class="ticker-item">Clear Creek Wildcats — 17W · 5L · #1 District · Report Live</span>
+    <span class="ticker-item">C. Munoz (DHS) — .450 AVG · 4 HR · 14 RBI · 1.285 OPS</span>
+    <span class="ticker-item">B. Chadwick (DHS) — 7W · 0L · 0.90 ERA · 40 IP</span>
+    <span class="ticker-item">I. Ramirez (DHS) — 56 K · 14.4 K/9 · 2.06 ERA</span>
+    <span class="ticker-item">Z. Clark (CRK) — .373 AVG · 41 K · 1.74 ERA · 11.9 K/9</span>
+    <span class="ticker-item">T. Prappas (CRK) — .521 OBP · 14 BB · 0.87 ERA</span>
+    <span class="ticker-item">T. Sauers (CRK) — 19 SB · 3-0 · 0.52 WHIP</span>
+    <span class="ticker-item">District 24-6A · Region III · Spring 2026</span>
+  </div>
+</div>
+
+<!-- ── MAIN CONTENT ──────────────────────────────────────── -->
+<main class="main">
+
+
+
+  <!-- STANDINGS -->
+  <section id="standings">
+    <div class="reveal">
+      <div class="section-label">As of April 1, 2026</div>
+      <h2 class="section-title">District Standings</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="standings-wrap reveal">
+      <table class="standings-table">
+        <thead>
+          <tr>
+            <th style="width:36px;text-align:center">#</th>
+            <th class="col-team" colspan="2">Team</th>
+            <th colspan="4" class="dist-hdr">— District —</th>
+            <th colspan="4" class="ovr-hdr">— Overall —</th>
+            <th>Streak</th><th>Report</th>
+          </tr>
+          <tr>
+            <th></th><th class="col-team" colspan="2"></th>
+            <th>W-L-T</th><th>PCT</th><th>RF</th><th>RA</th>
+            <th>W-L-T</th><th>PCT</th><th>RF</th><th>RA</th>
+            <th>Streak</th><th>Report</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="sec-hdr"><td colspan="13">⚡ PLAYOFF POSITIONS — Top 4 Advance</td></tr>
+          <tr>
+            <td><span class="st-rank top">1</span></td>
+            <td class="col-team" colspan="2"><span class="st-logo" style="background:#006633">CRK</span><span class="st-name">Clear Creek</span><span class="st-nick">Wildcats</span></td>
+            <td><span class="st-rec">4-2</span></td><td class="st-pct">.667</td><td>19</td><td>9</td>
+            <td><span class="st-rec">17-5</span></td><td class="st-pct">.773</td><td>102</td><td>46</td>
+            <td><span class="st-badge st-w">2W</span></td><td><a href="/clear_creek_varsity_stats.html" class="st-link">View Report ↗</a></td>
+          </tr>
+          <tr class="hl">
+            <td><span class="st-rank top">2</span></td>
+            <td class="col-team" colspan="2"><span class="st-logo" style="background:#1a3a6e">DHS</span><span class="st-name">Dickinson</span><span class="st-nick">Gators</span></td>
+            <td><span class="st-rec">4-2</span></td><td class="st-pct">.667</td><td>16</td><td>8</td>
+            <td><span class="st-rec">14-5-1</span></td><td class="st-pct">.725</td><td>115</td><td>50</td>
+            <td><span class="st-badge st-l">1L</span></td><td><a href="/dickinson_varsity_stats.html" class="st-link" target="_blank">View Report ↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="st-rank top">3</span></td>
+            <td class="col-team" colspan="2"><span class="st-logo" style="background:#003087">CLK</span><span class="st-name">Clear Lake</span><span class="st-nick">Falcons</span></td>
+            <td><span class="st-rec">3-3</span></td><td class="st-pct">.500</td><td>22</td><td>20</td>
+            <td><span class="st-rec">12-10-2</span></td><td class="st-pct">.542</td><td>117</td><td>88</td>
+            <td><span class="st-badge st-w">1W</span></td><td><span class="st-soon">Coming Soon</span></td>
+          </tr>
+          <tr class="cutoff">
+            <td><span class="st-rank top">4</span></td>
+            <td class="col-team" colspan="2"><span class="st-logo" style="background:#002855">CSP</span><span class="st-name">Clear Springs</span><span class="st-nick">Chargers</span></td>
+            <td><span class="st-rec">3-3</span></td><td class="st-pct">.500</td><td>49</td><td>32</td>
+            <td><span class="st-rec">10-10-2</span></td><td class="st-pct">.500</td><td>156</td><td>133</td>
+            <td><span class="st-badge st-l">1L</span></td><td><span class="st-soon">Coming Soon</span></td>
+          </tr>
+          <tr class="sec-hdr"><td colspan="13">▾ OUT OF PLAYOFF POSITION</td></tr>
+          <tr>
+            <td><span class="st-rank">5</span></td>
+            <td class="col-team" colspan="2"><span class="st-logo" style="background:#8b1a1a">DPK</span><span class="st-name">Deer Park</span><span class="st-nick">Deer</span></td>
+            <td><span class="st-rec">2-2</span></td><td class="st-pct">.500</td><td>11</td><td>12</td>
+            <td><span class="st-rec">6-9-3</span></td><td class="st-pct">.417</td><td>68</td><td>81</td>
+            <td><span class="st-badge st-w">2W</span></td><td><span class="st-soon">Coming Soon</span></td>
+          </tr>
+          <tr>
+            <td><span class="st-rank">6</span></td>
+            <td class="col-team" colspan="2"><span class="st-logo" style="background:#003f87">BZW</span><span class="st-name">Brazoswood</span><span class="st-nick">Buccaneers</span></td>
+            <td><span class="st-rec">2-2</span></td><td class="st-pct">.500</td><td>14</td><td>20</td>
+            <td><span class="st-rec">11-8</span></td><td class="st-pct">.579</td><td>112</td><td>72</td>
+            <td><span class="st-badge st-w">1W</span></td><td><span class="st-soon">Coming Soon</span></td>
+          </tr>
+          <tr>
+            <td><span class="st-rank">7</span></td>
+            <td class="col-team" colspan="2"><span class="st-logo" style="background:#6b0000">CBK</span><span class="st-name">Clear Brook</span><span class="st-nick">Wolverines</span></td>
+            <td><span class="st-rec">1-5</span></td><td class="st-pct">.167</td><td>17</td><td>43</td>
+            <td><span class="st-rec">5-19</span></td><td class="st-pct">.208</td><td>86</td><td>189</td>
+            <td><span class="st-badge st-l">4L</span></td><td><span class="st-soon">Coming Soon</span></td>
+          </tr>
+          <tr>
+            <td><span class="st-rank">8</span></td>
+            <td class="col-team" colspan="2"><span class="st-logo" style="background:#1c2951">CFL</span><span class="st-name">Clear Falls</span><span class="st-nick">Knights</span></td>
+            <td><span class="st-rec">0-1</span></td><td class="st-pct">.000</td><td>0</td><td>7</td>
+            <td><span class="st-rec">5-7</span></td><td class="st-pct">.417</td><td>36</td><td>53</td>
+            <td><span class="st-badge st-l">1L</span></td><td><span class="st-soon">Coming Soon</span></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td class="col-team" colspan="3">DISTRICT TOTALS</td>
+            <td>18-18-0</td><td>—</td><td>140</td><td>147</td>
+            <td>77-62-10</td><td>—</td><td>768</td><td>704</td>
+            <td colspan="2">Through 3/30/2026</td>
+          </tr>
+        </tfoot>
+      </table>
+      <div class="st-note">🕒 Updated: April 1, 2026 · Source: MaxPreps / UIL 24-6A · Highlighted row = Dickinson Gators · ⭐ = Report Live</div>
+    </div>
+  </section>
+
+
+  <!-- TEAMS -->
+  <section id="teams">
+    <div class="reveal">
+      <div class="section-label">All 8 Programs</div>
+      <h2 class="section-title">District Teams</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="teams-grid reveal" id="teams-grid"></div>
+  </section>
+
+  <!-- DISTRICT LEADERS -->
+  <section id="leaders">
+    <div class="reveal">
+      <div class="section-label">Across All 8 Schools</div>
+      <h2 class="section-title">District Leaders</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="leaders-coming reveal">
+      <div class="leader-placeholder-grid" style="max-width:1100px;margin:0 auto;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));">
+
+        <div class="leader-ph-card" style="border-color:rgba(232,168,37,.35);background:rgba(232,168,37,.05);">
+          <div class="leader-ph-stat" style="color:var(--gold);font-size:1.9rem">.450</div>
+          <div style="font-family:var(--font-ui);font-size:.78rem;font-weight:700;color:var(--white);margin:.25rem 0 .1rem">C. Munoz</div>
+          <div class="leader-ph-label">Batting AVG</div>
+          <div style="font-family:var(--font-ui);font-size:.62rem;color:var(--muted);margin-top:.2rem;letter-spacing:.5px">Dickinson Gators</div>
+        </div>
+
+        <div class="leader-ph-card" style="border-color:rgba(232,168,37,.35);background:rgba(232,168,37,.05);">
+          <div class="leader-ph-stat" style="color:var(--gold);font-size:1.9rem">1.285</div>
+          <div style="font-family:var(--font-ui);font-size:.78rem;font-weight:700;color:var(--white);margin:.25rem 0 .1rem">C. Munoz</div>
+          <div class="leader-ph-label">OPS</div>
+          <div style="font-family:var(--font-ui);font-size:.62rem;color:var(--muted);margin-top:.2rem;letter-spacing:.5px">Dickinson Gators</div>
+        </div>
+
+        <div class="leader-ph-card" style="border-color:rgba(232,168,37,.35);background:rgba(232,168,37,.05);">
+          <div class="leader-ph-stat" style="color:var(--gold);font-size:1.9rem">.521</div>
+          <div style="font-family:var(--font-ui);font-size:.78rem;font-weight:700;color:var(--white);margin:.25rem 0 .1rem">T. Prappas</div>
+          <div class="leader-ph-label">On-Base %</div>
+          <div style="font-family:var(--font-ui);font-size:.62rem;color:var(--muted);margin-top:.2rem;letter-spacing:.5px">Clear Creek Wildcats</div>
+        </div>
+
+        <div class="leader-ph-card" style="border-color:rgba(232,168,37,.35);background:rgba(232,168,37,.05);">
+          <div class="leader-ph-stat" style="color:var(--gold);font-size:1.9rem">4</div>
+          <div style="font-family:var(--font-ui);font-size:.78rem;font-weight:700;color:var(--white);margin:.25rem 0 .1rem">C. Munoz</div>
+          <div class="leader-ph-label">Home Runs</div>
+          <div style="font-family:var(--font-ui);font-size:.62rem;color:var(--muted);margin-top:.2rem;letter-spacing:.5px">Dickinson Gators</div>
+        </div>
+
+        <div class="leader-ph-card" style="border-color:rgba(232,168,37,.35);background:rgba(232,168,37,.05);">
+          <div class="leader-ph-stat" style="color:var(--gold);font-size:1.9rem">14</div>
+          <div style="font-family:var(--font-ui);font-size:.78rem;font-weight:700;color:var(--white);margin:.25rem 0 .1rem">C. Munoz</div>
+          <div class="leader-ph-label">RBI</div>
+          <div style="font-family:var(--font-ui);font-size:.62rem;color:var(--muted);margin-top:.2rem;letter-spacing:.5px">Dickinson Gators</div>
+        </div>
+
+        <div class="leader-ph-card" style="border-color:rgba(232,168,37,.35);background:rgba(232,168,37,.05);">
+          <div class="leader-ph-stat" style="color:var(--gold);font-size:1.9rem">19</div>
+          <div style="font-family:var(--font-ui);font-size:.78rem;font-weight:700;color:var(--white);margin:.25rem 0 .1rem">T. Sauers</div>
+          <div class="leader-ph-label">Stolen Bases</div>
+          <div style="font-family:var(--font-ui);font-size:.62rem;color:var(--muted);margin-top:.2rem;letter-spacing:.5px">Clear Creek Wildcats</div>
+        </div>
+
+        <div class="leader-ph-card" style="border-color:rgba(232,168,37,.35);background:rgba(232,168,37,.05);">
+          <div class="leader-ph-stat" style="color:var(--gold);font-size:1.9rem">0.87</div>
+          <div style="font-family:var(--font-ui);font-size:.78rem;font-weight:700;color:var(--white);margin:.25rem 0 .1rem">T. Prappas</div>
+          <div class="leader-ph-label">ERA (min 10 IP)</div>
+          <div style="font-family:var(--font-ui);font-size:.62rem;color:var(--muted);margin-top:.2rem;letter-spacing:.5px">Clear Creek Wildcats</div>
+        </div>
+
+        <div class="leader-ph-card" style="border-color:rgba(232,168,37,.35);background:rgba(232,168,37,.05);">
+          <div class="leader-ph-stat" style="color:var(--gold);font-size:1.9rem">41</div>
+          <div style="font-family:var(--font-ui);font-size:.78rem;font-weight:700;color:var(--white);margin:.25rem 0 .1rem">Z. Clark</div>
+          <div class="leader-ph-label">Strikeouts (P)</div>
+          <div style="font-family:var(--font-ui);font-size:.62rem;color:var(--muted);margin-top:.2rem;letter-spacing:.5px">Clear Creek Wildcats</div>
+        </div>
+
+        <div class="leader-ph-card" style="border-color:rgba(232,168,37,.35);background:rgba(232,168,37,.05);">
+          <div class="leader-ph-stat" style="color:var(--gold);font-size:1.9rem">0.52</div>
+          <div style="font-family:var(--font-ui);font-size:.78rem;font-weight:700;color:var(--white);margin:.25rem 0 .1rem">T. Sauers</div>
+          <div class="leader-ph-label">WHIP (min 5 IP)</div>
+          <div style="font-family:var(--font-ui);font-size:.62rem;color:var(--muted);margin-top:.2rem;letter-spacing:.5px">Clear Creek Wildcats</div>
+        </div>
+
+        <div class="leader-ph-card" style="border-color:rgba(232,168,37,.35);background:rgba(232,168,37,.05);">
+          <div class="leader-ph-stat" style="color:var(--gold);font-size:1.9rem">14.4</div>
+          <div style="font-family:var(--font-ui);font-size:.78rem;font-weight:700;color:var(--white);margin:.25rem 0 .1rem">I. Ramirez</div>
+          <div class="leader-ph-label">K/9 Rate</div>
+          <div style="font-family:var(--font-ui);font-size:.62rem;color:var(--muted);margin-top:.2rem;letter-spacing:.5px">Dickinson Gators</div>
+        </div>
+
+        <div class="leader-ph-card" style="border-color:rgba(232,168,37,.35);background:rgba(232,168,37,.05);">
+          <div class="leader-ph-stat" style="color:var(--gold);font-size:1.9rem">7</div>
+          <div style="font-family:var(--font-ui);font-size:.78rem;font-weight:700;color:var(--white);margin:.25rem 0 .1rem">B. Chadwick</div>
+          <div class="leader-ph-label">Pitcher Wins</div>
+          <div style="font-family:var(--font-ui);font-size:.62rem;color:var(--muted);margin-top:.2rem;letter-spacing:.5px">Dickinson Gators</div>
+        </div>
+
+        <div class="leader-ph-card">
+          <div class="leader-ph-stat">—</div>
+          <div style="font-family:var(--font-ui);font-size:.78rem;color:var(--muted);margin:.25rem 0 .1rem">More Coming</div>
+          <div class="leader-ph-label">As reports added</div>
+          <div style="font-family:var(--font-ui);font-size:.62rem;color:var(--muted);margin-top:.2rem;letter-spacing:.5px">6 teams remaining</div>
+        </div>
+
+      </div>
+      <p style="font-family:var(--font-ui);font-size:.72rem;color:var(--muted);letter-spacing:1px;margin-top:1.5rem;text-align:center;">★ Based on Dickinson & Clear Creek data only — leaders will update as remaining 6 team reports are completed</p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="reveal">
+      <div class="section-label">The Process</div>
+      <h2 class="section-title">How We Scout</h2>
+      <div class="section-rule"></div>
+      <div class="about-text">
+        <p>Every report on this site is built from <strong>raw box score data</strong> — at-bats, hits, strikeouts, walks, earned runs — compiled game by game across the full season. No guesswork. No subjective rankings without the numbers to back them up.</p>
+        <p>Individual player cards include <strong>scouting grades</strong> (S through D) across five tools: Contact, Power, Plate Discipline, Speed, and Overall offensive value — all calculated from real production data relative to the district pool.</p>
+        <p>As more teams are added, the <strong>District Leaders</strong> section will update automatically to show the top performers across all 8 programs.</p>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="section-label">What's Tracked</div>
+      <h2 class="section-title" style="font-size:1.8rem">Stat Glossary</h2>
+      <div class="section-rule"></div>
+      <ul class="about-list">
+        <li>PA — Plate Appearances (AB + BB + HBP + SF)</li>
+        <li>AVG — Batting Average (H ÷ AB)</li>
+        <li>OBP — On-Base Percentage</li>
+        <li>SLG — Slugging Percentage (TB ÷ AB)</li>
+        <li>OPS — On-Base + Slugging (overall offense)</li>
+        <li>K% — Strikeout Rate (SO ÷ PA)</li>
+        <li>ERA — Earned Run Average (ER ÷ IP × 9)</li>
+        <li>WHIP — Walks + Hits per Inning Pitched</li>
+        <li>K/9 — Strikeouts per 9 Innings</li>
+        <li>1B · 2B · 3B · HR — Hit type breakdown</li>
+        <li>SB — Stolen Bases (speed metric)</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">District <span>24-6A</span> Baseball Scouting</div>
+    <div class="footer-meta">UIL 6A · Region III · Spring 2026 · Independent Analysis · Not affiliated with UIL or CCISD</div>
+  </div>
+</footer>
+
+<script>
+// ── TEAM DATA ──────────────────────────────────────────────
+const TEAMS = [
+  {
+    name: "Clear Creek", nickname: "Wildcats", abbr: "CRK",
+    colors: ["#006633", "#c8a832"], bgColor: "#006633",
+    record: "17-5", distRecord: "4-2", distPct: ".667",
+    gamesPlayed: 22, rank: 1, streak: "2W",
+    status: "live", statusLabel: "Report Live",
+    link: "/clear_creek_varsity_stats.html",
+    note: "Full stats · Batting · Pitching · Scouting", reported: true,
+  },
+  {
+    name: "Dickinson", nickname: "Gators", abbr: "DHS",
+    colors: ["#1a3a6e", "#c8102e"], bgColor: "#1a3a6e",
+    record: "14-5-1", distRecord: "4-2", distPct: ".667",
+    gamesPlayed: 20, rank: 2, streak: "1L",
+    status: "live", statusLabel: "Report Live",
+    link: "/dickinson_varsity_stats.html",
+    note: "Full stats · Batting · Pitching · Scouting", reported: true,
+  },
+  {
+    name: "Clear Lake", nickname: "Falcons", abbr: "CLK",
+    colors: ["#003087", "#c8a832"], bgColor: "#003087",
+    record: "12-10-2", distRecord: "3-3", distPct: ".500",
+    gamesPlayed: 24, rank: 3, streak: "1W",
+    status: "coming", statusLabel: "Report Pending",
+    link: null, note: "Scouting report in progress", reported: false,
+  },
+  {
+    name: "Clear Springs", nickname: "Chargers", abbr: "CSP",
+    colors: ["#002855", "#c8102e"], bgColor: "#002855",
+    record: "10-10-2", distRecord: "3-3", distPct: ".500",
+    gamesPlayed: 22, rank: 4, streak: "1L",
+    status: "coming", statusLabel: "Report Pending",
+    link: null, note: "Scouting report in progress", reported: false,
+  },
+  {
+    name: "Deer Park", nickname: "Deer", abbr: "DPK",
+    colors: ["#8b0000", "#f5a623"], bgColor: "#8b0000",
+    record: "6-9-3", distRecord: "2-2", distPct: ".500",
+    gamesPlayed: 18, rank: 5, streak: "2W",
+    status: "coming", statusLabel: "Report Pending",
+    link: null, note: "Scouting report in progress", reported: false,
+  },
+  {
+    name: "Brazoswood", nickname: "Buccaneers", abbr: "BZW",
+    colors: ["#003f87", "#c8102e"], bgColor: "#003f87",
+    record: "11-8", distRecord: "2-2", distPct: ".500",
+    gamesPlayed: 19, rank: 6, streak: "1W",
+    status: "coming", statusLabel: "Report Pending",
+    link: null, note: "Scouting report in progress", reported: false,
+  },
+  {
+    name: "Clear Brook", nickname: "Wolverines", abbr: "CBK",
+    colors: ["#8b0000", "#c0c0c0"], bgColor: "#8b0000",
+    record: "5-19", distRecord: "1-5", distPct: ".167",
+    gamesPlayed: 24, rank: 7, streak: "4L",
+    status: "coming", statusLabel: "Report Pending",
+    link: null, note: "Scouting report in progress", reported: false,
+  },
+  {
+    name: "Clear Falls", nickname: "Knights", abbr: "CFL",
+    colors: ["#1c2951", "#c8102e"], bgColor: "#1c2951",
+    record: "5-7", distRecord: "0-1", distPct: ".000",
+    gamesPlayed: 12, rank: 8, streak: "1L",
+    status: "coming", statusLabel: "Report Pending",
+    link: null, note: "Scouting report in progress", reported: false,
+  },
+];
+
+// ── DISTRICT STANDINGS DATA ────────────────────────────────
+const STANDINGS = [
+  { rank:1, name:"Clear Creek",   nick:"Wildcats",    dWLT:"4-2",   dPCT:".667", dRF:19,  dRA:9,   oWLT:"17-5",    oPCT:".773", oRF:102, oRA:46,  streak:"2W", live:true  },
+  { rank:2, name:"Dickinson",     nick:"Gators",      dWLT:"4-2",   dPCT:".667", dRF:16,  dRA:8,   oWLT:"14-5-1",  oPCT:".725", oRF:115, oRA:50,  streak:"1L", live:true  },
+  { rank:3, name:"Clear Lake",    nick:"Falcons",     dWLT:"3-3",   dPCT:".500", dRF:22,  dRA:20,  oWLT:"12-10-2", oPCT:".542", oRF:117, oRA:88,  streak:"1W", live:false },
+  { rank:4, name:"Clear Springs", nick:"Chargers",    dWLT:"3-3",   dPCT:".500", dRF:49,  dRA:32,  oWLT:"10-10-2", oPCT:".500", oRF:156, oRA:133, streak:"1L", live:false },
+  { rank:5, name:"Deer Park",     nick:"Deer",        dWLT:"2-2",   dPCT:".500", dRF:11,  dRA:12,  oWLT:"6-9-3",   oPCT:".417", oRF:68,  oRA:81,  streak:"2W", live:false },
+  { rank:6, name:"Brazoswood",    nick:"Buccaneers",  dWLT:"2-2",   dPCT:".500", dRF:14,  dRA:20,  oWLT:"11-8",    oPCT:".579", oRF:112, oRA:72,  streak:"1W", live:false },
+  { rank:7, name:"Clear Brook",   nick:"Wolverines",  dWLT:"1-5",   dPCT:".167", dRF:17,  dRA:43,  oWLT:"5-19",    oPCT:".208", oRF:86,  oRA:189, streak:"4L", live:false },
+  { rank:8, name:"Clear Falls",   nick:"Knights",     dWLT:"0-1",   dPCT:".000", dRF:0,   dRA:7,   oWLT:"5-7",     oPCT:".417", oRF:36,  oRA:53,  streak:"1L", live:false },
+];
+
+function buildStandings() {
+  const tbody = document.getElementById('standings-tbody');
+  if (!tbody) return;
+  STANDINGS.forEach((t, i) => {
+    const streakColor = t.streak.includes('W') ? '#00b894' : '#d63031';
+    const bg = i % 2 === 0 ? 'rgba(255,255,255,0.015)' : 'transparent';
+    const highlight = t.live ? 'border-left:3px solid #e8a825;' : '';
+    const nameColor = t.live ? '#e8a825' : '#eef2f9';
+    const reportCol = t.live
+      ? `<a href="${t.rank===1 ? '/clear_creek_varsity_stats.html' : '/dickinson_varsity_stats.html'}" class="st-link">View Report ↗</a>`
+      : `<span class="st-soon">Coming Soon</span>`;
+    const tr = document.createElement('tr');
+    tr.style.cssText = `background:${bg};border-bottom:1px solid rgba(255,255,255,0.04);${highlight}transition:background 0.15s;`;
+    tr.onmouseenter = () => tr.style.background = 'rgba(255,255,255,0.04)';
+    tr.onmouseleave = () => tr.style.background = bg;
+    tr.innerHTML = `
+      <td style="padding:11px 14px;text-align:center;font-family:var(--font-head);font-size:1.1rem;color:#3a3f57;">${t.rank}</td>
+      <td style="padding:11px 14px;">
+        <div style="font-family:var(--font-ui);font-weight:700;font-size:0.95rem;color:${nameColor};letter-spacing:0.5px">${t.name} ${t.live ? '<span style="font-size:0.65rem;background:rgba(232,168,37,0.15);color:#e8a825;border:1px solid rgba(232,168,37,0.3);padding:2px 6px;border-radius:2px;letter-spacing:1px;margin-left:6px;">LIVE</span>' : ''}</div>
+        <div style="font-family:var(--font-ui);font-size:0.7rem;color:#3a3f57;letter-spacing:1px;text-transform:uppercase;">${t.nick}</div>
+      </td>
+      <td style="padding:11px 14px;text-align:center;font-family:var(--font-ui);font-weight:700;color:#eef2f9;">${t.dWLT}</td>
+      <td style="padding:11px 14px;text-align:center;font-family:var(--font-ui);color:#8892a4;">${t.dPCT}</td>
+      <td style="padding:11px 14px;text-align:center;font-family:var(--font-ui);font-size:0.82rem;color:#8892a4;">${t.dRF}–${t.dRA}</td>
+      <td style="padding:11px 14px;text-align:center;font-family:var(--font-ui);font-weight:700;color:#eef2f9;">${t.oWLT}</td>
+      <td style="padding:11px 14px;text-align:center;font-family:var(--font-ui);color:#8892a4;">${t.oPCT}</td>
+      <td style="padding:11px 14px;text-align:center;font-family:var(--font-ui);color:#8892a4;">${t.oRF}</td>
+      <td style="padding:11px 14px;text-align:center;font-family:var(--font-ui);color:#8892a4;">${t.oRA}</td>
+      <td style="padding:11px 14px;text-align:center;font-family:var(--font-ui);font-size:0.78rem;font-weight:700;color:${streakColor};background:${streakColor}15;border-radius:3px;">${t.streak}</td>
+      <td style="padding:11px 14px;text-align:center;">${reportCol}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ── BUILD TEAM CARDS ───────────────────────────────────────
+function buildTeams() {
+  const grid = document.getElementById('teams-grid');
+  if (!grid) return;
+  TEAMS.forEach((t, i) => {
+    const card = document.createElement(t.link ? 'a' : 'div');
+    if (t.link) { card.href = t.link; }
+    card.className = 'team-card reveal';
+    const [c1, c2] = t.colors;
+    const accentGrad = `linear-gradient(90deg, ${c1}, ${c2})`;
+    const streakColor = t.streak && t.streak.includes('W') ? '#00b894' : t.streak && t.streak.includes('L') ? '#d63031' : '#8892a4';
+    card.innerHTML = `
+      <div class="team-card-accent" style="background:${accentGrad}"></div>
+      <div class="team-card-body">
+        <div class="team-card-header">
+          <div style="background:${c1}25;border:1px solid ${c1}50;color:${c2};font-family:var(--font-head);font-size:1.1rem;font-weight:700;width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:4px;flex-shrink:0;">${t.rank}</div>
+          <div class="team-info" style="flex:1">
+            <h3>${t.name}</h3>
+            <div class="team-nickname">${t.nickname}</div>
+          </div>
+          <div style="font-family:var(--font-ui);font-size:0.75rem;font-weight:700;color:${streakColor};letter-spacing:1px;background:${streakColor}18;border:1px solid ${streakColor}35;padding:3px 8px;border-radius:3px;flex-shrink:0">${t.streak || '—'}</div>
+        </div>
+        <div class="team-stats-row">
+          <div class="team-stat-cell">
+            <span class="team-stat-val" style="color:${t.reported ? '#e8a825' : '#c8d0e0'}">${t.record}</span>
+            <span class="team-stat-label">Overall</span>
+          </div>
+          <div class="team-stat-cell">
+            <span class="team-stat-val" style="color:${t.reported ? '#e8a825' : '#c8d0e0'}">${t.distRecord}</span>
+            <span class="team-stat-label">District</span>
+          </div>
+          <div class="team-stat-cell">
+            <span class="team-stat-val" style="color:${t.reported ? '#e8a825' : '#c8d0e0'}">${t.distPct || '—'}</span>
+            <span class="team-stat-label">Dist PCT</span>
+          </div>
+        </div>
+        <div class="team-card-footer">
+          <span class="team-status status-${t.status}">${t.statusLabel}</span>
+          ${t.link ? `<span class="team-link-arrow">View Report →</span>` : `<span style="font-family:var(--font-ui);font-size:0.72rem;color:var(--muted);letter-spacing:.5px">${t.note}</span>`}
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// ── SCROLL REVEAL ──────────────────────────────────────────
+function initReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
+// ── INIT ───────────────────────────────────────────────────
+buildStandings();
+buildTeams();
+setTimeout(initReveal, 100);
+</script>
+</body>
+</html>
