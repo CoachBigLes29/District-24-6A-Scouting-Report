@@ -1,0 +1,1609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clear Brook Wolverines · District 24-6A Scouting Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d0000;
+    --blue: #1a3a6e;
+    --blue-mid: #CC0000;
+    --blue-bright: #CC0000;
+    --red: #8B0000;
+    --red-bright: #e31837;
+    --white: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gold: #f59e0b;
+    --green: #10b981;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-condensed: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0d0000 0%, #0f2040 50%, #0d0000 100%);
+    border-bottom: 3px solid var(--red);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: 80px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+
+  .logo-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+  }
+
+  .logo-circle {
+    width: 56px;
+    height: 56px;
+    background: transparent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow: 0 0 0 2px var(--red), 0 0 0 4px rgba(200,16,46,0.2);
+  }
+
+  .logo-circle img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+  }
+
+  .logo-circle .logo-placeholder {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--navy);
+  }
+
+  .team-info h1 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  .team-meta {
+    font-family: var(--font-condensed);
+    font-size: 0.85rem;
+    color: var(--gray-400);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .record-badge {
+    margin-left: auto;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .badge {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    padding: 4px 14px;
+    border-radius: 4px;
+  }
+
+  .badge-w { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+  .badge-l { background: rgba(200,16,46,0.15); color: var(--red-bright); border: 1px solid rgba(200,16,46,0.3); }
+  .badge-t { background: rgba(148,163,184,0.15); color: var(--gray-300); border: 1px solid rgba(148,163,184,0.3); }
+
+  .district-tag {
+    font-family: var(--font-condensed);
+    font-size: 0.8rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    color: var(--gray-300);
+  }
+
+  /* NAV TABS */
+  .nav {
+    background: #0d1f3c;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 0 2rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+
+  .nav button {
+    background: none;
+    border: none;
+    color: var(--gray-400);
+    font-family: var(--font-condensed);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 14px 24px;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .nav button:hover { color: var(--white); }
+
+  .nav button.active {
+    color: var(--white);
+    border-bottom-color: var(--red);
+  }
+
+  /* MAIN CONTENT */
+  .content {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* SECTION HEADERS */
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, var(--red) 0%, rgba(200,16,46,0) 100%);
+  }
+
+  .section-line {
+    width: 4px;
+    height: 28px;
+    background: var(--red);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* TABLES */
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 2.5rem;
+    background: rgba(255,255,255,0.02);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-condensed);
+    font-size: 0.92rem;
+  }
+
+  thead th {
+    background: rgba(26,58,110,0.6);
+    color: var(--gray-200);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    position: relative;
+    border-bottom: 2px solid var(--red);
+    transition: background 0.15s;
+  }
+
+  thead th:hover { background: rgba(139,0,0,0.7); color: var(--white); }
+  thead th.sorted-asc::after { content: ' ▲'; font-size: 0.65rem; color: var(--gold); }
+  thead th.sorted-desc::after { content: ' ▼'; font-size: 0.65rem; color: var(--gold); }
+
+  /* Tooltips */
+  thead th[data-tip] {
+    position: relative;
+  }
+  thead th[data-tip]::before {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e2d4a;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--gray-200);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    text-transform: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    max-width: 220px;
+    white-space: normal;
+    text-align: center;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+  thead th[data-tip]:hover::before { opacity: 1; }
+
+  tbody tr {
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+
+  tbody tr:hover { background: rgba(255,255,255,0.045); }
+  tbody tr:last-child { border-bottom: none; }
+
+  tbody td {
+    padding: 9px 14px;
+    color: var(--gray-200);
+    white-space: nowrap;
+  }
+
+  .player-name {
+    font-weight: 700;
+    color: var(--white);
+    font-size: 0.95rem;
+    min-width: 160px;
+  }
+
+  .player-num {
+    color: var(--gray-400);
+    font-size: 0.8rem;
+  }
+
+  /* Stat coloring */
+  .stat-high { color: var(--gold); font-weight: 700; }
+  .stat-good { color: #34d399; font-weight: 600; }
+  .stat-mid  { color: var(--white); }
+  .stat-low  { color: var(--gray-400); }
+
+  /* SEARCH/FILTER */
+  .table-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .search-box {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    padding: 7px 14px;
+    color: var(--white);
+    font-family: var(--font-condensed);
+    font-size: 0.9rem;
+    outline: none;
+    width: 220px;
+    transition: border-color 0.2s;
+  }
+
+  .search-box::placeholder { color: var(--gray-500); }
+  .search-box:focus { border-color: var(--blue-bright); }
+
+  .min-pa-label {
+    font-family: var(--font-condensed);
+    font-size: 0.85rem;
+    color: var(--gray-400);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .min-pa-label input {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 5px 8px;
+    color: var(--white);
+    font-family: var(--font-condensed);
+    width: 60px;
+    font-size: 0.9rem;
+    outline: none;
+  }
+
+  /* ── LEADERS / SCOUTING PAGE ─────────────────────────── */
+  .leaders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .leader-card {
+    background: linear-gradient(145deg, rgba(26,58,110,0.4), rgba(10,22,40,0.6));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .leader-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(200,16,46,0.4);
+  }
+
+  .leader-stat {
+    font-family: var(--font-condensed);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gray-400);
+    margin-bottom: 4px;
+  }
+
+  .leader-value {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .leader-player {
+    font-family: var(--font-condensed);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .leader-sub {
+    font-size: 0.78rem;
+    color: var(--gray-400);
+    margin-top: 2px;
+  }
+
+  /* Bar chart for leaders */
+  .stat-bar-section { margin-bottom: 2.5rem; }
+
+  .stat-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .stat-bar-name {
+    font-family: var(--font-condensed);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--white);
+    width: 160px;
+    flex-shrink: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .stat-bar-track {
+    flex: 1;
+    height: 18px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .stat-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 6px;
+  }
+
+  .stat-bar-fill span {
+    font-family: var(--font-condensed);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* Scouting report */
+  .scouting-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .scouting-grid { grid-template-columns: 1fr; }
+    .leaders-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .scout-card {
+    background: linear-gradient(145deg, rgba(10,22,40,0.8), rgba(15,32,64,0.6));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+
+  .scout-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 1rem;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--red);
+  }
+
+  .scout-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-family: var(--font-condensed);
+    font-size: 0.9rem;
+  }
+
+  .scout-label {
+    color: var(--gray-400);
+    width: 110px;
+    flex-shrink: 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+  }
+
+  .scout-val {
+    color: var(--gray-200);
+    flex: 1;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-family: var(--font-condensed);
+    letter-spacing: 0.5px;
+    margin: 2px 2px 2px 0;
+  }
+
+  .tag-green { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+  .tag-red { background: rgba(200,16,46,0.15); color: #f87171; border: 1px solid rgba(200,16,46,0.3); }
+  .tag-blue { background: rgba(204,0,0,0.2); color: #93c5fd; border: 1px solid rgba(204,0,0,0.3); }
+  .tag-gold { background: rgba(245,158,11,0.15); color: var(--gold); border: 1px solid rgba(245,158,11,0.3); }
+
+  /* Radar / visual bars */
+  .radar-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .radar-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .radar-card .player-head {
+    font-family: var(--font-condensed);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--white);
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 6px;
+  }
+
+  .radar-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    font-family: var(--font-condensed);
+    font-size: 0.82rem;
+  }
+
+  .radar-stat-label { color: var(--gray-400); }
+
+  .radar-mini-bar {
+    width: 80px;
+    height: 6px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .radar-mini-fill {
+    height: 100%;
+    border-radius: 3px;
+  }
+
+  /* SCHEDULE PAGE */
+  .schedule-list { margin-bottom: 2rem; }
+
+  .game-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-family: var(--font-condensed);
+    font-size: 0.92rem;
+    transition: background 0.15s;
+    border-radius: 4px;
+  }
+
+  .game-row:hover { background: rgba(255,255,255,0.03); }
+
+  .game-num {
+    color: var(--gray-500);
+    font-size: 0.78rem;
+    width: 28px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .game-result {
+    width: 50px;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    border-radius: 3px;
+    padding: 2px 6px;
+  }
+
+  .res-W { background: rgba(16,185,129,0.15); color: #34d399; }
+  .res-L { background: rgba(200,16,46,0.15); color: #f87171; }
+  .res-T { background: rgba(148,163,184,0.15); color: var(--gray-300); }
+
+  .game-opp { flex: 1; color: var(--gray-200); }
+  .game-score { color: var(--white); font-weight: 700; width: 70px; }
+  .game-ha { color: var(--gray-400); font-size: 0.78rem; width: 40px; }
+
+  /* AVG display helper */
+  .avg-display { font-variant-numeric: tabular-nums; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--gray-600);
+    font-family: var(--font-condensed);
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: 2rem;
+  }
+
+  /* ── BATTING SCOUTING CARDS ─────────────────── */
+  .scout-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  @media (max-width: 900px) { .scout-cards-grid { grid-template-columns: 1fr; } }
+
+  .scout-player-card {
+    background: linear-gradient(160deg, #1a0000 0%, #0d0000 100%);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .scout-player-card:hover {
+    border-color: rgba(204,0,0,0.4);
+    transform: translateY(-1px);
+  }
+
+  .scout-card-top-bar {
+    height: 3px;
+    background: linear-gradient(90deg, #CC0000, #8B0000, #CC0000);
+  }
+
+  .scout-card-header {
+    padding: 14px 16px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .scout-player-title h3 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 2px;
+  }
+
+  .scout-player-meta {
+    font-family: var(--font-condensed);
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .scout-grade-tags {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .grade-tag {
+    font-family: var(--font-condensed);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .grade-tag .grade-letter { font-size: 0.85rem; font-weight: 900; }
+  .grade-S { background: rgba(245,158,11,0.18); color: #fbbf24; border: 1px solid rgba(245,158,11,0.35); }
+  .grade-A { background: rgba(16,185,129,0.15); color: #34d399; border: 1px solid rgba(16,185,129,0.3); }
+  .grade-B { background: rgba(204,0,0,0.18); color: #60a5fa; border: 1px solid rgba(204,0,0,0.35); }
+  .grade-C { background: rgba(148,163,184,0.12); color: #94a3b8; border: 1px solid rgba(148,163,184,0.25); }
+  .grade-D { background: rgba(239,68,68,0.1); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+
+  .scout-bars {
+    padding: 12px 16px 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .scout-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+
+  .scout-bar-label {
+    font-family: var(--font-condensed);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--gray-400);
+    width: 32px;
+    flex-shrink: 0;
+    text-transform: uppercase;
+  }
+
+  .scout-bar-track {
+    flex: 1;
+    height: 9px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .scout-bar-fill {
+    height: 100%;
+    border-radius: 5px;
+    transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .bar-avg  { background: linear-gradient(90deg, #CC0000, #3b82f6); }
+  .bar-ops  { background: linear-gradient(90deg, #0e7490, #06b6d4); }
+  .bar-sb   { background: linear-gradient(90deg, #d97706, #fbbf24); }
+  .bar-bb   { background: linear-gradient(90deg, #065f46, #10b981); }
+
+  .scout-bar-pct {
+    font-family: var(--font-condensed);
+    font-size: 0.72rem;
+    color: var(--gray-400);
+    width: 34px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .scout-card-notes {
+    padding: 10px 16px 14px;
+    font-family: var(--font-condensed);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+
+  .scout-note-row {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 5px;
+    align-items: flex-start;
+  }
+
+  .scout-note-icon { flex-shrink: 0; margin-top: 1px; font-size: 0.78rem; }
+  .scout-note-text { color: var(--gray-300); flex: 1; }
+  .scout-note-text strong { color: var(--white); }
+
+  .scout-stat-line {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-family: var(--font-condensed);
+    font-size: 0.72rem;
+    color: var(--gray-500);
+    letter-spacing: 0.3px;
+  }
+  .scout-stat-line span { color: var(--gray-300); margin: 0 2px; }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="logo-area">
+    <div class="logo-circle" id="logoCircle">
+      <svg width="72" height="72" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;filter:drop-shadow(0 2px 8px rgba(0,0,0,.7))">
+  <polygon points="50,2 98,50 50,98 2,50" fill="#CC0000" stroke="#FFFFFF" stroke-width="3.5"/>
+  <polygon points="2,50 24,36 24,64" fill="#FFFFFF"/>
+  <polygon points="98,50 76,36 76,64" fill="#FFFFFF"/>
+  <polygon points="50,20 72,50 50,80 28,50" fill="#8B0000"/>
+  <text x="51" y="67" text-anchor="middle" font-family="Arial Black,Impact,sans-serif" font-weight="900" font-size="46" fill="#FFFFFF">B</text>
+</svg>
+    </div>
+    <div class="team-info">
+      <h1>CLEAR BROOK WOLVERINES</h1>
+      <div class="team-meta">Varsity Baseball · Spring 2026</div>
+    </div>
+  </div>
+  <div class="record-badge">
+    <span class="district-tag">UIL 24-6A Region III</span>
+    <span class="badge badge-w">5 W</span>
+    <span class="badge badge-l">20 L</span>
+    <span class="badge badge-t">0 T</span>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" style="font-family:var(--font-condensed);font-size:.85rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:14px 20px;color:#10b981;text-decoration:none;border-bottom:3px solid transparent;display:flex;align-items:center;gap:6px;" onmouseover="this.style.borderBottomColor='#10b981'" onmouseout="this.style.borderBottomColor='transparent'">← Hub</a>
+  <button class="active" onclick="showPage('batting')">Batting Stats</button>
+  <button onclick="showPage('pitching')">Pitching Stats</button>
+  <button onclick="showPage('leaders')">Team Leaders</button>
+  <button onclick="showPage('scouting')">Scouting Report</button>
+  <button onclick="showPage('schedule')">Schedule</button>
+</nav>
+
+<!-- MAIN -->
+<main class="content">
+
+  <!-- ═══════ BATTING PAGE ═══════ -->
+  <div class="page active" id="page-batting">
+    <div class="section-title"><div class="section-line"></div>Batting Statistics</div>
+
+    <div class="table-controls">
+      <input class="search-box" id="bat-search" placeholder="Search player..." oninput="filterTable('bat-table','bat-search')">
+      <label class="min-pa-label">
+        Min PA: <input type="number" id="min-pa" value="0" min="0" oninput="filterByPA()" style="width:55px">
+      </label>
+    </div>
+
+    <div class="table-wrap">
+      <table id="bat-table">
+        <thead>
+          <tr>
+            <th onclick="sortTable('bat-table',0,false)" data-tip="Player name and jersey number">Player</th>
+            <th onclick="sortTable('bat-table',1,true)" data-tip="Games: Number of games the player appeared in">G</th>
+            <th onclick="sortTable('bat-table',2,true)" data-tip="Plate Appearances: AB + BB + HBP + SF. All trips to the plate.">PA</th>
+            <th onclick="sortTable('bat-table',3,true)" data-tip="At-Bats: Official at-bats (excludes BB, HBP, SF)">AB</th>
+            <th onclick="sortTable('bat-table',4,true)" data-tip="Runs: Number of times the player scored">R</th>
+            <th onclick="sortTable('bat-table',5,true)" data-tip="Hits: Total hits (1B + 2B + 3B + HR)">H</th>
+            <th onclick="sortTable('bat-table',6,true)" data-tip="Singles: Base hits for exactly one base">1B</th>
+            <th onclick="sortTable('bat-table',7,true)" data-tip="Doubles: Hits that result in a two-base advance">2B</th>
+            <th onclick="sortTable('bat-table',8,true)" data-tip="Triples: Hits that result in a three-base advance">3B</th>
+            <th onclick="sortTable('bat-table',9,true)" data-tip="Home Runs: Hits that score the batter directly">HR</th>
+            <th onclick="sortTable('bat-table',10,true)" data-tip="Runs Batted In: Runs scored directly due to the batter's PA">RBI</th>
+            <th onclick="sortTable('bat-table',11,true)" data-tip="Walks (Base on Balls): 4 balls resulting in a free base">BB</th>
+            <th onclick="sortTable('bat-table',12,true)" data-tip="Strikeouts: At-bats that end with three strikes">SO</th>
+            <th onclick="sortTable('bat-table',13,true)" data-tip="Stolen Bases: Bases taken by running during live play">SB</th>
+            <th onclick="sortTable('bat-table',14,true)" data-tip="Batting Average: H ÷ AB. League average ~.300 in HS ball">AVG</th>
+            <th onclick="sortTable('bat-table',15,true)" data-tip="On-Base Percentage: (H+BB+HBP)÷(AB+BB+HBP+SF). How often batter reaches base.">OBP</th>
+            <th onclick="sortTable('bat-table',16,true)" data-tip="Slugging %: Total Bases ÷ AB. Measures power; .500+ is elite">SLG</th>
+            <th onclick="sortTable('bat-table',17,true)" data-tip="On-Base Plus Slugging: OBP + SLG. Overall offensive value. .900+ is very good.">OPS</th>
+            <th onclick="sortTable('bat-table',18,true)" data-tip="Strikeout %: SO ÷ PA × 100. Lower is better; below 20% is solid.">K%</th>
+          </tr>
+        </thead>
+        <tbody id="bat-tbody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════ PITCHING PAGE ═══════ -->
+  <div class="page" id="page-pitching">
+    <div class="section-title"><div class="section-line"></div>Pitching Statistics</div>
+
+    <div class="table-controls">
+      <input class="search-box" id="pit-search" placeholder="Search pitcher..." oninput="filterTable('pit-table','pit-search')">
+    </div>
+
+    <div class="table-wrap">
+      <table id="pit-table">
+        <thead>
+          <tr>
+            <th onclick="sortTable('pit-table',0,false)" data-tip="Player name and jersey number">Player</th>
+            <th onclick="sortTable('pit-table',1,true)" data-tip="Games pitched in">G</th>
+            <th onclick="sortTable('pit-table',2,true)" data-tip="Wins: Games where pitcher was the winning pitcher">W</th>
+            <th onclick="sortTable('pit-table',3,true)" data-tip="Losses: Games where pitcher was the losing pitcher">L</th>
+            <th onclick="sortTable('pit-table',4,false)" data-tip="Innings Pitched (whole.thirds format, e.g. 5.2 = 5⅔ innings)">IP</th>
+            <th onclick="sortTable('pit-table',5,true)" data-tip="Hits Allowed">H</th>
+            <th onclick="sortTable('pit-table',6,true)" data-tip="Runs Allowed: Total runs scored against the pitcher">R</th>
+            <th onclick="sortTable('pit-table',7,true)" data-tip="Earned Runs: Runs scored without the help of errors">ER</th>
+            <th onclick="sortTable('pit-table',8,true)" data-tip="Walks Allowed (Base on Balls)">BB</th>
+            <th onclick="sortTable('pit-table',9,true)" data-tip="Strikeouts recorded by the pitcher">SO</th>
+            <th onclick="sortTable('pit-table',10,true)" data-tip="Earned Run Average: ER ÷ IP × 9. Lower is better; under 2.00 is elite.">ERA</th>
+            <th onclick="sortTable('pit-table',11,true)" data-tip="WHIP: (Walks+Hits) ÷ IP. Baserunners per inning. Under 1.00 is excellent.">WHIP</th>
+            <th onclick="sortTable('pit-table',12,true)" data-tip="K/9: Strikeouts per 9 innings. Measures strikeout rate; 10+ is very high.">K/9</th>
+          </tr>
+        </thead>
+        <tbody id="pit-tbody">
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════ LEADERS PAGE ═══════ -->
+  <div class="page" id="page-leaders">
+    <div class="section-title"><div class="section-line"></div>Team Leaders</div>
+
+    <!-- Quick Stat Cards -->
+    <div class="leaders-grid" id="leaders-cards"></div>
+
+    <!-- Bar Charts -->
+    <div class="section-title"><div class="section-line"></div>Batting Average Leaders</div>
+    <div class="stat-bar-section" id="bar-avg"></div>
+
+    <div class="section-title"><div class="section-line"></div>OPS Leaders</div>
+    <div class="stat-bar-section" id="bar-ops"></div>
+
+    <div class="section-title"><div class="section-line"></div>RBI Leaders</div>
+    <div class="stat-bar-section" id="bar-rbi"></div>
+
+    <div class="section-title"><div class="section-line"></div>Strikeout Leaders (Pitchers)</div>
+    <div class="stat-bar-section" id="bar-kpitch"></div>
+
+    <div class="section-title"><div class="section-line"></div>ERA Leaders (min 4 IP)</div>
+    <div class="stat-bar-section" id="bar-era"></div>
+  </div>
+
+  <!-- ═══════ SCOUTING PAGE ═══════ -->
+  <div class="page" id="page-scouting">
+
+    <!-- Team Overview section preserved -->
+    <div class="section-title"><div class="section-line"></div>Team Scouting Overview</div>
+    <div class="scouting-grid">
+      <div class="scout-card">
+        <h3>📋 Team Overview</h3>
+        <div class="scout-row"><span class="scout-label">Record</span><span class="scout-val">14–5–1 (Spring 2026)</span></div>
+        <div class="scout-row"><span class="scout-label">District</span><span class="scout-val">UIL 24-6A Region III</span></div>
+        <div class="scout-row"><span class="scout-label">Team AVG</span><span class="scout-val" id="scout-avg"></span></div>
+        <div class="scout-row"><span class="scout-label">Team OBP</span><span class="scout-val" id="scout-obp"></span></div>
+        <div class="scout-row"><span class="scout-label">Team SLG</span><span class="scout-val" id="scout-slg"></span></div>
+        <div class="scout-row"><span class="scout-label">Team OPS</span><span class="scout-val" id="scout-ops"></span></div>
+        <div class="scout-row"><span class="scout-label">Runs/Game</span><span class="scout-val" id="scout-rpg"></span></div>
+        <div class="scout-row"><span class="scout-label">Identity</span><span class="scout-val"><span class="tag tag-blue">Contact</span><span class="tag tag-gold">Pitching-driven</span><span class="tag tag-green">Aggressive on bases</span></span></div>
+      </div>
+      <div class="scout-card">
+        <h3>⚔️ Offensive Strengths</h3>
+        <div class="scout-row"><span class="scout-label">Top Contact</span><span class="scout-val">Christian Munoz (.450 AVG, 4 HR, team-leading power threat)</span></div>
+        <div class="scout-row"><span class="scout-label">Table-Setter</span><span class="scout-val">Isaac Ramirez (.383, 6 2B, patient — 8 BB; gets on consistently)</span></div>
+        <div class="scout-row"><span class="scout-label">Versatility</span><span class="scout-val">Munoz and Ramirez both pitch/play field; Chadwick pitches/plays OF</span></div>
+        <div class="scout-row"><span class="scout-label">Base Running</span><span class="scout-val">Team active: Aydin Edison 5 SB, Chris Jackson 4 SB, Monsivaiz 4 SB</span></div>
+        <div class="scout-row"><span class="scout-label">Power Threat</span><span class="scout-val">Munoz (4 HR), Ramirez (1 HR, 6 2B), Edison (1 HR, 4 2B)</span></div>
+      </div>
+      <div class="scout-card">
+        <h3>⚠️ Offensive Vulnerabilities</h3>
+        <div class="scout-row"><span class="scout-label">Bottom Order</span><span class="scout-val">Kaedyn Harris (.062 AVG, 47.4 K%), Minteer (.091, 42.9 K%) struggle vs. strikeout pitchers</span></div>
+        <div class="scout-row"><span class="scout-label">Strategy</span><span class="scout-val"><span class="tag tag-red">Attack K-prone hitters early in count</span></span></div>
+        <div class="scout-row"><span class="scout-label">Depth</span><span class="scout-val">Bench contributors show limited production; rotation of starters is narrow</span></div>
+      </div>
+      <div class="scout-card">
+        <h3>🔥 Pitching Staff</h3>
+        <div class="scout-row"><span class="scout-label">Staff Ace</span><span class="scout-val">Brady Chadwick: 7-0, 0.90 ERA, 0.75 WHIP — <span class="tag tag-green">Shutdown arm</span></span></div>
+        <div class="scout-row"><span class="scout-label">Horse</span><span class="scout-val">Isaac Ramirez: 35 IP, 3-1, 2.06 ERA, 14.4 K/9 — elite swing-and-miss</span></div>
+        <div class="scout-row"><span class="scout-label">Closer Role</span><span class="scout-val">Chris Harper: 3 W, 2.89 ERA — solid in relief/mid-length appearances</span></div>
+        <div class="scout-row"><span class="scout-label">Vulnerability</span><span class="scout-val">Munoz (9 BB/10 IP) and Larios walk-prone; opposing teams should take pitches</span></div>
+      </div>
+      <div class="scout-card">
+        <h3>🎯 Opposing Team Strategy</h3>
+        <div class="scout-row"><span class="scout-label">vs. Chadwick</span><span class="scout-val">Work deep counts. Contact approach — he limits walks (5 BB/34 IP)</span></div>
+        <div class="scout-row"><span class="scout-label">vs. Ramirez</span><span class="scout-val">Shorten swing early in count. Patience = walks (16 BB)</span></div>
+        <div class="scout-row"><span class="scout-label">vs. Munoz/Larios</span><span class="scout-val"><span class="tag tag-red">Take pitches</span> — both walk batters at high rate</span></div>
+        <div class="scout-row"><span class="scout-label">Defend Munoz</span><span class="scout-val">Pull shift — 2 HR, 2 3B, 4 2B; hits hard to gaps</span></div>
+      </div>
+      <div class="scout-card">
+        <h3>✅ Outlook</h3>
+        <div class="scout-row"><span class="scout-label">Best Asset</span><span class="scout-val"><span class="tag tag-green">Brady Chadwick pitching</span> — virtually unhittable when on</span></div>
+        <div class="scout-row"><span class="scout-label">Offense</span><span class="scout-val">2 elite bats (Munoz, Ramirez) + 3 solid contact hitters</span></div>
+        <div class="scout-row"><span class="scout-label">Prediction</span><span class="scout-val">Dangerous in district playoffs — Chadwick/Ramirez 1-2 punch can carry them deep</span></div>
+      </div>
+    </div>
+
+    <!-- Individual Player Scouting Cards -->
+    <div class="section-title"><div class="section-line"></div>Individual Batting Scouting Reports</div>
+    <div style="display:flex;gap:0.75rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap;">
+      <input class="search-box" id="scout-search" placeholder="Search player..." oninput="filterScout()" style="width:200px">
+      <label class="min-pa-label">Min AB: <input type="number" id="scout-min-ab" value="0" min="0" oninput="filterScout()" style="width:50px"></label>
+      <div style="margin-left:auto;font-family:var(--font-condensed);font-size:0.78rem;color:var(--gray-400);display:flex;gap:1rem;flex-wrap:wrap;">
+        <span><span class="tag tag-gold" style="font-size:0.7rem">S</span> Elite</span>
+        <span><span class="tag tag-green" style="font-size:0.7rem">A</span> Great</span>
+        <span><span class="tag tag-blue" style="font-size:0.7rem">B</span> Good</span>
+        <span><span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:0.7rem;font-weight:700;background:rgba(148,163,184,0.15);color:#94a3b8;border:1px solid rgba(148,163,184,0.3)">C</span> Average</span>
+        <span><span style="display:inline-block;padding:2px 8px;border-radius:3px;font-size:0.7rem;font-weight:700;background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.25)">D</span> Below Avg</span>
+      </div>
+    </div>
+    <div id="scout-cards-grid"></div>
+  </div>
+
+    <!-- ═══════ SCHEDULE PAGE ═══════ -->
+  <div class="page" id="page-schedule">
+    <div class="section-title"><div class="section-line"></div>2026 Schedule & Results</div>
+    <div class="schedule-list" id="schedule-list"></div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  Clear Brook Wolverines · Spring 2026 · Stats through 20 games · Data via ScorePaaS
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════
+// RAW DATA
+// ═══════════════════════════════════════════════
+
+const BATTING = [
+  { name:"R. Benavides",   num:"#1",  G:25, PA:88, AB:72, R:24, H:27, "1B":14, "2B":10, "3B":1, HR:2, RBI:10, BB:12, SO:15, SB:0,  AVG:".375", OBP:".477", SLG:".625", OPS:"1.102", KPct:17.0 },
+  { name:"L. Spears",      num:"#8",  G:25, PA:85, AB:61, R:9,  H:17, "1B":13, "2B":3,  "3B":0, HR:1, RBI:12, BB:9,  SO:15, SB:0,  AVG:".279", OBP:".439", SLG:".377", OPS:".816",  KPct:17.6 },
+  { name:"M. Chagoya",     num:"#9",  G:25, PA:73, AB:64, R:9,  H:11, "1B":10, "2B":1,  "3B":0, HR:0, RBI:3,  BB:7,  SO:18, SB:0,  AVG:".172", OBP:".264", SLG:".188", OPS:".452",  KPct:24.7 },
+  { name:"A. Paredes",     num:"#23", G:21, PA:71, AB:59, R:6,  H:16, "1B":13, "2B":3,  "3B":0, HR:0, RBI:7,  BB:8,  SO:20, SB:0,  AVG:".271", OBP:".371", SLG:".322", OPS:".693",  KPct:28.2 },
+  { name:"B. Tran",        num:"#17", G:21, PA:67, AB:52, R:8,  H:11, "1B":6,  "2B":5,  "3B":0, HR:0, RBI:5,  BB:9,  SO:12, SB:0,  AVG:".212", OBP:".359", SLG:".308", OPS:".667",  KPct:17.9 },
+  { name:"G. Prudhomme",   num:"#5",  G:25, PA:55, AB:46, R:5,  H:13, "1B":12, "2B":1,  "3B":0, HR:0, RBI:6,  BB:6,  SO:8,  SB:0,  AVG:".283", OBP:".365", SLG:".304", OPS:".669",  KPct:14.5 },
+  { name:"D. Gracia",      num:"#3",  G:25, PA:53, AB:44, R:5,  H:11, "1B":8,  "2B":2,  "3B":0, HR:1, RBI:7,  BB:3,  SO:11, SB:0,  AVG:".250", OBP:".353", SLG:".364", OPS:".717",  KPct:20.8 },
+  { name:"J. Panaguia",    num:"#13", G:21, PA:51, AB:40, R:1,  H:7,  "1B":7,  "2B":0,  "3B":0, HR:0, RBI:2,  BB:9,  SO:11, SB:0,  AVG:".175", OBP:".353", SLG:".175", OPS:".528",  KPct:21.6 },
+  { name:"J. De Leon",     num:"#24", G:19, PA:50, AB:44, R:3,  H:6,  "1B":6,  "2B":0,  "3B":0, HR:0, RBI:4,  BB:5,  SO:14, SB:0,  AVG:".136", OBP:".240", SLG:".136", OPS:".376",  KPct:28.0 },
+  { name:"T. Oelkrug",     num:"#11", G:22, PA:45, AB:40, R:2,  H:13, "1B":13, "2B":0,  "3B":0, HR:0, RBI:4,  BB:4,  SO:11, SB:0,  AVG:".325", OBP:".386", SLG:".325", OPS:".711",  KPct:24.4 },
+  { name:"R. Nicholson",   num:"#6",  G:17, PA:28, AB:24, R:3,  H:7,  "1B":6,  "2B":0,  "3B":1, HR:0, RBI:3,  BB:1,  SO:7,  SB:0,  AVG:".292", OBP:".370", SLG:".375", OPS:".745",  KPct:25.0 },
+  { name:"J. Brooks",      num:"#7",  G:10, PA:27, AB:22, R:1,  H:8,  "1B":6,  "2B":2,  "3B":0, HR:0, RBI:2,  BB:2,  SO:5,  SB:0,  AVG:".364", OBP:".462", SLG:".455", OPS:".917",  KPct:18.5 },
+  { name:"Z. Quintanilla", num:"#14", G:20, PA:25, AB:22, R:2,  H:2,  "1B":2,  "2B":0,  "3B":0, HR:0, RBI:1,  BB:3,  SO:6,  SB:0,  AVG:".091", OBP:".200", SLG:".091", OPS:".291",  KPct:24.0 },
+  { name:"J. Overcash",    num:"#2",  G:15, PA:4,  AB:4,  R:5,  H:0,  "1B":0,  "2B":0,  "3B":0, HR:0, RBI:0,  BB:0,  SO:2,  SB:0,  AVG:".000", OBP:".000", SLG:".000", OPS:".000",  KPct:50.0 },
+  { name:"A. Rodriguez",   num:"#19", G:14, PA:3,  AB:3,  R:3,  H:0,  "1B":0,  "2B":0,  "3B":0, HR:0, RBI:0,  BB:0,  SO:2,  SB:0,  AVG:".000", OBP:".000", SLG:".000", OPS:".000",  KPct:66.7 }
+];
+
+const PITCHING = [
+  { name:"M. Chagoya",     num:"#9",  G:25, W:0, L:0, IP:"—",  IP_n:0,  H:0, R:0, ER:0, BB:7,  SO:18, ERA:0,    WHIP:0,    K9:0   },
+  { name:"A. Paredes",     num:"#23", G:21, W:0, L:0, IP:"—",  IP_n:0,  H:0, R:0, ER:0, BB:8,  SO:20, ERA:0,    WHIP:0,    K9:0   },
+  { name:"D. Gracia",      num:"#3",  G:25, W:0, L:0, IP:"—",  IP_n:0,  H:0, R:0, ER:0, BB:3,  SO:11, ERA:0,    WHIP:0,    K9:0   },
+  { name:"R. Benavides",   num:"#1",  G:25, W:0, L:0, IP:"—",  IP_n:0,  H:0, R:0, ER:0, BB:12, SO:15, ERA:0,    WHIP:0,    K9:0   },
+  { name:"L. Spears",      num:"#8",  G:25, W:0, L:0, IP:"—",  IP_n:0,  H:0, R:0, ER:0, BB:9,  SO:15, ERA:0,    WHIP:0,    K9:0   },
+  { name:"B. Tran",        num:"#17", G:21, W:0, L:0, IP:"—",  IP_n:0,  H:0, R:0, ER:0, BB:9,  SO:12, ERA:0,    WHIP:0,    K9:0   }
+];
+
+const SCOUT_DATA = [
+  { name:"R. Benavides", num:"#1", pos:"OF / P", G:25, PA:88, AB:72, R:24, H:27, "1B":14, "2B":10, "3B":1, HR:2, RBI:10, BB:12, SO:15, SB:0, HBP:3, SF:1, AVG:".375", OBP:".477", SLG:".625", OPS:"1.102", KPct:17.0, bbRate:13.6,
+    avg_pct:100, ops_pct:100, sb_pct:0, bb_pct:80,
+    g_overall:"S", g_contact:"S", g_power:"A", g_discipline:"B", g_speed:"C",
+    strengths:["elite contact (.375 AVG — team leader by wide margin)","dominant OPS (1.102) — district-level offensive threat","extra-base machine (10 2B, 1 3B, 2 HR in 25 games)","top run producer (10 RBI, 24 R)","most dangerous bat in lineup"],
+    concerns:["pitch away and work down — genuine power threat (2 HR, 10 2B)","will be keyed on — limited protection behind him in order"]
+  },
+  { name:"J. Brooks", num:"#7", pos:"OF", G:10, PA:27, AB:22, R:1, H:8, "1B":6, "2B":2, "3B":0, HR:0, RBI:2, BB:2, SO:5, SB:0, HBP:2, SF:0, AVG:".364", OBP:".462", SLG:".455", OPS:".917", KPct:18.5, bbRate:7.4,
+    avg_pct:97, ops_pct:83, sb_pct:0, bb_pct:42,
+    g_overall:"A", g_contact:"S", g_power:"C", g_discipline:"B", g_speed:"C",
+    strengths:["elite contact (.364 AVG in limited duty)","strong OPS (.917) when active","gap power (2 2B in just 22 AB)"],
+    concerns:["very small sample (27 PA) — uncertain over full season","limited games played — injury or depth issue unknown"]
+  },
+  { name:"T. Oelkrug", num:"#11", pos:"INF", G:22, PA:45, AB:40, R:2, H:13, "1B":13, "2B":0, "3B":0, HR:0, RBI:4, BB:4, SO:11, SB:0, HBP:0, SF:0, AVG:".325", OBP:".386", SLG:".325", OPS:".711", KPct:24.4, bbRate:8.9,
+    avg_pct:87, ops_pct:64, sb_pct:0, bb_pct:48,
+    g_overall:"B", g_contact:"A", g_power:"D", g_discipline:"C", g_speed:"C",
+    strengths:["strong contact (.325 AVG, sophomore — upside ahead)","consistent presence across 22 games"],
+    concerns:["zero extra-base hits in 40 AB — singles only","K rate above average (24.4%)"]
+  },
+  { name:"L. Spears", num:"#8", pos:"INF / OF", G:25, PA:85, AB:61, R:9, H:17, "1B":13, "2B":3, "3B":0, HR:1, RBI:12, BB:9, SO:15, SB:0, HBP:10, SF:2, AVG:".279", OBP:".439", SLG:".377", OPS:".816", KPct:17.6, bbRate:10.6,
+    avg_pct:74, ops_pct:74, sb_pct:0, bb_pct:58,
+    g_overall:"B", g_contact:"B", g_power:"C", g_discipline:"A", g_speed:"C",
+    strengths:["team leader in RBI (12)","high OBP (.439) — 10 HBP signals plate crowding","durable (25 games, most PA on team)"],
+    concerns:["10 HBP — crowds inside — attack with hard inside fastballs","limited power ceiling beyond gap hits"]
+  },
+  { name:"G. Prudhomme", num:"#5", pos:"INF", G:25, PA:55, AB:46, R:5, H:13, "1B":12, "2B":1, "3B":0, HR:0, RBI:6, BB:6, SO:8, SB:0, HBP:0, SF:0, AVG:".283", OBP:".365", SLG:".304", OPS:".669", KPct:14.5, bbRate:10.9,
+    avg_pct:75, ops_pct:61, sb_pct:0, bb_pct:60,
+    g_overall:"C", g_contact:"B", g_power:"D", g_discipline:"B", g_speed:"C",
+    strengths:["lowest K rate among regulars (14.5%) — makes consistent contact","reliable over 25 games"],
+    concerns:["minimal power (0 HR, 1 2B)","singles-only profile limits run-scoring"]
+  },
+  { name:"A. Paredes", num:"#23", pos:"INF", G:21, PA:71, AB:59, R:6, H:16, "1B":13, "2B":3, "3B":0, HR:0, RBI:7, BB:8, SO:20, SB:0, HBP:2, SF:1, AVG:".271", OBP:".371", SLG:".322", OPS:".693", KPct:28.2, bbRate:11.3,
+    avg_pct:72, ops_pct:63, sb_pct:0, bb_pct:62,
+    g_overall:"C", g_contact:"C", g_power:"D", g_discipline:"B", g_speed:"C",
+    strengths:["decent patience (11.3% BB rate)","solid RBI output (7) for lineup position"],
+    concerns:["high K rate (28.2%) — attack early in count","no HR in 59 AB — contact/gap hitter only"]
+  },
+  { name:"B. Tran", num:"#17", pos:"INF / OF", G:21, PA:67, AB:52, R:8, H:11, "1B":6, "2B":5, "3B":0, HR:0, RBI:5, BB:9, SO:12, SB:0, HBP:3, SF:0, AVG:".212", OBP:".359", SLG:".308", OPS:".667", KPct:17.9, bbRate:13.4,
+    avg_pct:56, ops_pct:61, sb_pct:0, bb_pct:73,
+    g_overall:"C", g_contact:"D", g_power:"C", g_discipline:"A", g_speed:"C",
+    strengths:["excellent patience (13.4% BB rate)","5 doubles — gap power when making contact"],
+    concerns:["low average (.212) — inconsistent contact","mix in off-speed early — will expand zone"]
+  },
+  { name:"D. Gracia", num:"#3", pos:"INF / OF", G:25, PA:53, AB:44, R:5, H:11, "1B":8, "2B":2, "3B":0, HR:1, RBI:7, BB:3, SO:11, SB:0, HBP:4, SF:0, AVG:".250", OBP:".353", SLG:".364", OPS:".717", KPct:20.8, bbRate:5.7,
+    avg_pct:67, ops_pct:65, sb_pct:0, bb_pct:31,
+    g_overall:"C", g_contact:"C", g_power:"C", g_discipline:"D", g_speed:"C",
+    strengths:["1 HR and gap power (2 2B)","solid RBI total (7) in 44 AB"],
+    concerns:["aggressive (5.7% BB rate) — attack in zone early","4 HBP — may crowd inside part of plate"]
+  }
+];
+
+const SCHEDULE = [
+  { n:1,  date:"Feb 16", opp:"vs. Pasadena Memorial",   res:"L", score:"2-7",   district:false },
+  { n:2,  date:"Feb 19", opp:"@ Alvin",                  res:"L", score:"9-13",  district:false },
+  { n:3,  date:"Feb 19", opp:"vs. Angleton",              res:"W", score:"5-1",   district:false },
+  { n:4,  date:"Feb 20", opp:"vs. Strake Jesuit",         res:"L", score:"5-15",  district:false },
+  { n:5,  date:"Feb 20", opp:"vs. Boswell",               res:"L", score:"5-12",  district:false },
+  { n:6,  date:"Feb 21", opp:"vs. Sterling",              res:"L", score:"4-9",   district:false },
+  { n:7,  date:"Feb 23", opp:"@ St. Thomas Catholic",    res:"L", score:"0-7",   district:false },
+  { n:8,  date:"Feb 26", opp:"vs. Second Baptist",        res:"L", score:"1-7",   district:false },
+  { n:9,  date:"Feb 26", opp:"vs. Kinkaid",               res:"L", score:"4-12",  district:false },
+  { n:10, date:"Feb 27", opp:"vs. Goose Creek Memorial",  res:"L", score:"3-9",   district:false },
+  { n:11, date:"Feb 27", opp:"vs. Jordan",                res:"W", score:"2-1",   district:false },
+  { n:12, date:"Feb 28", opp:"vs. Cypress Ranch",         res:"L", score:"6-8",   district:false },
+  { n:13, date:"Mar 2",  opp:"@ Barbers Hill",            res:"L", score:"5-10",  district:false },
+  { n:14, date:"Mar 5",  opp:"vs. Oak Ridge",             res:"L", score:"1-12",  district:false },
+  { n:15, date:"Mar 5",  opp:"@ Barbers Hill",            res:"L", score:"1-2",   district:false },
+  { n:16, date:"Mar 6",  opp:"vs. Atascocita",            res:"L", score:"0-18",  district:false },
+  { n:17, date:"Mar 6",  opp:"vs. Liberty",               res:"W", score:"8-0",   district:false },
+  { n:18, date:"Mar 7",  opp:"vs. Splendora",             res:"W", score:"8-3",   district:false },
+  { n:19, date:"Mar 10", opp:"@ Clear Springs",           res:"L", score:"3-17",  district:true  },
+  { n:20, date:"Mar 13", opp:"vs. Clear Springs",         res:"W", score:"10-8",  district:true  },
+  { n:21, date:"Mar 17", opp:"vs. Dickinson",             res:"L", score:"0-1",   district:true  },
+  { n:22, date:"Mar 20", opp:"@ Dickinson",               res:"L", score:"0-8",   district:true  },
+  { n:23, date:"Mar 24", opp:"@ Deer Park",               res:"L", score:"1-3",   district:true  },
+  { n:24, date:"Mar 27", opp:"vs. Deer Park",             res:"L", score:"3-6",   district:true  },
+  { n:25, date:"Mar 31", opp:"vs. Clear Creek",           res:"L", score:"1-8",   district:true  },
+  { n:26, date:"Apr 2",  opp:"@ Clear Creek",             res:"TBD", score:"",    district:true  },
+  { n:27, date:"Apr 7",  opp:"@ Clear Falls",             res:"TBD", score:"",    district:true  },
+  { n:28, date:"Apr 10", opp:"vs. Clear Falls",           res:"TBD", score:"",    district:true  },
+  { n:29, date:"Apr 14", opp:"vs. Clear Lake",            res:"TBD", score:"",    district:true  },
+  { n:30, date:"Apr 17", opp:"@ Clear Lake",              res:"TBD", score:"",    district:true  },
+  { n:31, date:"Apr 21", opp:"vs. Brazoswood",            res:"TBD", score:"",    district:true  },
+  { n:32, date:"Apr 24", opp:"@ Brazoswood",              res:"TBD", score:"",    district:true  }
+]
+
+// ═══════════════════════════════════════════════
+// RENDER TABLES
+// ═══════════════════════════════════════════════
+
+function colorAVG(v) {
+  const n = parseFloat(v);
+  if (n >= 0.400) return 'stat-high';
+  if (n >= 0.300) return 'stat-good';
+  if (n >= 0.230) return 'stat-mid';
+  return 'stat-low';
+}
+function colorOPS(v) {
+  const n = parseFloat(v);
+  if (n >= 1.000) return 'stat-high';
+  if (n >= 0.800) return 'stat-good';
+  if (n >= 0.650) return 'stat-mid';
+  return 'stat-low';
+}
+function colorERA(n) {
+  if (n <= 1.00) return 'stat-high';
+  if (n <= 2.50) return 'stat-good';
+  if (n <= 4.50) return 'stat-mid';
+  return 'stat-low';
+}
+function colorWHIP(n) {
+  if (n <= 0.80) return 'stat-high';
+  if (n <= 1.20) return 'stat-good';
+  if (n <= 1.50) return 'stat-mid';
+  return 'stat-low';
+}
+function colorKPct(n) {
+  if (n <= 15) return 'stat-good';
+  if (n <= 22) return 'stat-mid';
+  return 'stat-low';
+}
+
+function buildBatting(data) {
+  const tbody = document.getElementById('bat-tbody');
+  tbody.innerHTML = '';
+  data.forEach(p => {
+    const tr = document.createElement('tr');
+    tr.dataset.name = p.name.toLowerCase();
+    tr.dataset.pa = p.PA;
+    tr.innerHTML = `
+      <td class="player-name">${p.name} <span class="player-num">${p.num}</span></td>
+      <td>${p.G}</td>
+      <td>${p.PA}</td>
+      <td>${p.AB}</td>
+      <td>${p.R}</td>
+      <td>${p.H}</td>
+      <td>${p["1B"]}</td>
+      <td>${p["2B"]}</td>
+      <td>${p["3B"]}</td>
+      <td>${p.HR > 0 ? `<span class="stat-high">${p.HR}</span>` : p.HR}</td>
+      <td>${p.RBI}</td>
+      <td>${p.BB}</td>
+      <td>${p.SO}</td>
+      <td>${p.SB > 0 ? `<span class="stat-good">${p.SB}</span>` : p.SB}</td>
+      <td class="${colorAVG(p.AVG)} avg-display">${p.AVG}</td>
+      <td class="${colorAVG(p.OBP)} avg-display">${p.OBP}</td>
+      <td class="${colorAVG(p.SLG)} avg-display">${p.SLG}</td>
+      <td class="${colorOPS(p.OPS)} avg-display">${p.OPS}</td>
+      <td class="${colorKPct(p.KPct)}">${p.KPct}%</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function buildPitching(data) {
+  const tbody = document.getElementById('pit-tbody');
+  tbody.innerHTML = '';
+  data.forEach(p => {
+    const tr = document.createElement('tr');
+    tr.dataset.name = p.name.toLowerCase();
+    tr.innerHTML = `
+      <td class="player-name">${p.name} <span class="player-num">${p.num}</span></td>
+      <td>${p.G}</td>
+      <td>${p.W > 0 ? `<span class="stat-good">${p.W}</span>` : p.W}</td>
+      <td>${p.L > 0 ? `<span class="stat-low">${p.L}</span>` : p.L}</td>
+      <td>${p.IP}</td>
+      <td>${p.H}</td>
+      <td>${p.R}</td>
+      <td>${p.ER}</td>
+      <td>${p.BB}</td>
+      <td>${p.SO}</td>
+      <td class="${colorERA(p.ERA)}">${p.ERA.toFixed(2)}</td>
+      <td class="${colorWHIP(p.WHIP)}">${p.WHIP.toFixed(2)}</td>
+      <td>${p.K9 >= 12 ? `<span class="stat-high">${p.K9}</span>` : p.K9 >= 9 ? `<span class="stat-good">${p.K9}</span>` : p.K9}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function buildSchedule() {
+  const list = document.getElementById('schedule-list');
+  list.innerHTML = '';
+  SCHEDULE.forEach(g => {
+    const d = document.createElement('div');
+    d.className = 'game-row';
+    const isUpcoming = !g.result;
+    d.innerHTML = `
+      <span class="game-num">${g.game}</span>
+      <span class="game-result res-${g.result || 'upcoming'}" style="${isUpcoming ? 'background:rgba(148,163,184,0.1);color:#94a3b8;border:1px solid rgba(148,163,184,0.2);' : ''}">${isUpcoming ? 'TBD' : g.result}</span>
+      <span class="game-ha">${g.date}</span>
+      <span class="game-opp">${g.opp}</span>
+      <span class="game-score">${g.score}</span>
+    `;
+    list.appendChild(d);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// LEADERS PAGE
+// ═══════════════════════════════════════════════
+
+function buildLeaders() {
+  const qual = battingData.filter(p => p.PA >= 20);
+
+  const leaders = [
+    { stat: "Batting Avg", value: ".450", player: "C. Munoz", sub: "17G · 60 AB", color: "#f59e0b" },
+    { stat: "OPS", value: "1.285", player: "C. Munoz", sub: "4 HR · 5 2B · 2 3B", color: "#e879f9" },
+    { stat: "Hits", value: "27", player: "C. Munoz", sub: "17 games", color: "#f59e0b" },
+    { stat: "Runs", value: "16", player: "C. Munoz", sub: "17 games", color: "#34d399" },
+    { stat: "RBI", value: "14", player: "C. Munoz", sub: "17G · 60 AB", color: "#f59e0b" },
+    { stat: "Home Runs", value: "4", player: "C. Munoz", sub: "Season total", color: "#e31837" },
+    { stat: "Doubles", value: "6", player: "I. Ramirez", sub: "6 2B in 60 AB", color: "#60a5fa" },
+    { stat: "Stolen Bases", value: "5", player: "A. Edison", sub: "18 games", color: "#34d399" },
+    { stat: "Walks (Bat)", value: "10", player: "A. Edison", sub: "58 PA · .466 OBP", color: "#60a5fa" },
+    { stat: "ERA (Pitch)", value: "0.90", player: "B. Chadwick", sub: "7 W · 40 IP", color: "#f59e0b" },
+    { stat: "WHIP", value: "0.75", player: "B. Chadwick", sub: "Elite control", color: "#e879f9" },
+    { stat: "Strikeouts (P)", value: "56", player: "I. Ramirez", sub: "35 IP · 14.4 K/9", color: "#34d399" },
+    { stat: "Pitcher Wins", value: "7", player: "B. Chadwick", sub: "7 starts, 0 losses", color: "#e31837" },
+    { stat: "K/9 Rate", value: "14.4", player: "I. Ramirez", sub: "Dominant arm", color: "#f59e0b" },
+  ];
+
+  const grid = document.getElementById('leaders-cards');
+  grid.innerHTML = '';
+  leaders.forEach(l => {
+    const c = document.createElement('div');
+    c.className = 'leader-card';
+    c.innerHTML = `
+      <div class="leader-stat">${l.stat}</div>
+      <div class="leader-value" style="color:${l.color}">${l.value}</div>
+      <div class="leader-player">${l.player}</div>
+      <div class="leader-sub">${l.sub}</div>
+    `;
+    grid.appendChild(c);
+  });
+
+  // Bar charts
+  buildBar('bar-avg', qual.map(p => ({ name: p.name, val: parseFloat(p.AVG), display: p.AVG })), 'batting-blue');
+  buildBar('bar-ops', qual.map(p => ({ name: p.name, val: parseFloat(p.OPS), display: p.OPS })), 'red');
+  buildBar('bar-rbi', qual.map(p => ({ name: p.name, val: p.RBI, display: p.RBI })), 'green');
+  buildBar('bar-kpitch', PITCHING.map(p => ({ name: p.name, val: p.SO, display: p.SO })), 'gold');
+  buildBar('bar-era', PITCHING.filter(p => p.IP_n >= 4).map(p => ({ name: p.name, val: p.ERA, display: p.ERA.toFixed(2), invert: true })), 'purple');
+}
+
+function buildBar(containerId, items, colorScheme) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  const sorted = [...items].sort((a, b) => (a.invert ? a.val - b.val : b.val - a.val)).slice(0, 7);
+  const max = Math.max(...sorted.map(s => s.val));
+  const colors = {
+    'batting-blue': 'linear-gradient(90deg, #CC0000, #2563eb)',
+    'red': 'linear-gradient(90deg, #8B0000, #e31837)',
+    'green': 'linear-gradient(90deg, #059669, #34d399)',
+    'gold': 'linear-gradient(90deg, #d97706, #f59e0b)',
+    'purple': 'linear-gradient(90deg, #7c3aed, #a78bfa)',
+  };
+  const bg = colors[colorScheme] || colors['batting-blue'];
+
+  sorted.forEach(item => {
+    const pct = item.invert ? (1 - (item.val / (max * 1.2))) * 100 : (item.val / max) * 100;
+    const div = document.createElement('div');
+    div.className = 'stat-bar-row';
+    div.innerHTML = `
+      <div class="stat-bar-name">${item.name}</div>
+      <div class="stat-bar-track">
+        <div class="stat-bar-fill" style="width:${Math.max(pct,4)}%;background:${bg}">
+          <span>${item.display}</span>
+        </div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// PLAYER PROFILES (scouting page)
+// ═══════════════════════════════════════════════
+
+function buildProfiles() {
+  // Team totals for scouting overview
+  const allBat = battingData;
+  const totalAB = allBat.reduce((s,p) => s+p.AB, 0);
+  const totalH = allBat.reduce((s,p) => s+p.H, 0);
+  const totalBB = allBat.reduce((s,p) => s+p.BB, 0);
+  const totalPA = allBat.reduce((s,p) => s+p.PA, 0);
+  const totalTB = allBat.reduce((s,p) => s + (p["1B"] + 2*p["2B"] + 3*p["3B"] + 4*p.HR), 0);
+  const totalR = allBat.reduce((s,p) => s+p.R, 0);
+  const teamAVG = (totalH/totalAB).toFixed(3);
+  const teamOBP = ((totalH+totalBB)/totalPA).toFixed(3);
+  const teamSLG = (totalTB/totalAB).toFixed(3);
+  const teamOPS = (parseFloat(teamOBP)+parseFloat(teamSLG)).toFixed(3);
+  if(document.getElementById('scout-avg')) document.getElementById('scout-avg').textContent = teamAVG;
+  if(document.getElementById('scout-obp')) document.getElementById('scout-obp').textContent = teamOBP;
+  if(document.getElementById('scout-slg')) document.getElementById('scout-slg').textContent = teamSLG;
+  if(document.getElementById('scout-ops')) document.getElementById('scout-ops').textContent = teamOPS;
+  if(document.getElementById('scout-rpg')) document.getElementById('scout-rpg').textContent = (totalR / 19).toFixed(1) + ' RPG';
+
+  buildScoutCards();
+}
+
+// ─── SCOUT DATA ───────────────────────────────────────────────────────────
+const SCOUT_DATA = [
+  { name:"Christian Munoz", num:"#7", pos:"3B / P", G:16, PA:58, AB:56, R:15, H:24, "1B":14, "2B":4, "3B":2, HR:4, RBI:12, BB:2, SO:9, SB:2, HBP:0, SF:0, AVG:".429", OBP:".448", SLG:".786", OPS:"1.234", KPct:15.5, bbRate:3.4,
+    avg_pct:100, ops_pct:100, sb_pct:40, bb_pct:19,
+    g_overall:"S", g_contact:"S", g_power:"S", g_discipline:"B", g_speed:"B",
+    strengths:["elite contact (.429 AVG)","elite offense (1.234 OPS)","speed threat (2 SB)","power bat (4 HR)","gap power (4 2B)","run producer (12 RBI)"],
+    concerns:["aggressive/free-swinger — attack in zone early (3.4% BB rate)"]
+  },
+  { name:"Isaac Ramirez", num:"#14", pos:"P / 1B", G:19, PA:67, AB:56, R:7, H:23, "1B":16, "2B":6, "3B":0, HR:1, RBI:13, BB:8, SO:10, SB:1, HBP:2, SF:2, AVG:".411", OBP:".478", SLG:".571", OPS:"1.049", KPct:14.9, bbRate:11.9,
+    avg_pct:96, ops_pct:85, sb_pct:20, bb_pct:65,
+    g_overall:"S", g_contact:"S", g_power:"A", g_discipline:"A", g_speed:"C",
+    strengths:["elite contact (.411 AVG)","elite offense (1.049 OPS)","good patience (11.9% BB rate)","gap power (6 2B)","run producer (13 RBI)"],
+    concerns:[]
+  },
+  { name:"Aydin Edison", num:"#4", pos:"RF / P", G:17, PA:55, AB:41, R:12, H:12, "1B":7, "2B":4, "3B":0, HR:1, RBI:6, BB:10, SO:9, SB:5, HBP:3, SF:1, AVG:".293", OBP:".473", SLG:".463", OPS:".936", KPct:16.4, bbRate:18.2,
+    avg_pct:68, ops_pct:76, sb_pct:100, bb_pct:100,
+    g_overall:"S", g_contact:"B", g_power:"A", g_discipline:"A", g_speed:"A",
+    strengths:["solid contact (.293 AVG)","strong offense (.936 OPS)","excellent patience (18.2% BB rate)","elite speed (5 SB)","gap power (4 2B)"],
+    concerns:["gets hit often (3 HBP) — may crowd the plate/inside pitches"]
+  },
+  { name:"Diego Silva", num:"#11", pos:"C", G:16, PA:48, AB:43, R:0, H:15, "1B":13, "2B":2, "3B":0, HR:0, RBI:8, BB:4, SO:8, SB:0, HBP:1, SF:0, AVG:".349", OBP:".396", SLG:".395", OPS:".791", KPct:16.7, bbRate:8.3,
+    avg_pct:81, ops_pct:64, sb_pct:0, bb_pct:46,
+    g_overall:"A", g_contact:"A", g_power:"C", g_discipline:"B", g_speed:"D",
+    strengths:["solid contact (.349 AVG)","steady RBI producer (8 RBI)"],
+    concerns:["limited power — 0 HR in 43 AB","limited extra-base ability"]
+  },
+  { name:"Cash Hildebrand", num:"#13", pos:"2B / 3B", G:18, PA:56, AB:48, R:13, H:15, "1B":15, "2B":0, "3B":0, HR:0, RBI:8, BB:5, SO:9, SB:1, HBP:1, SF:1, AVG:".312", OBP:".393", SLG:".312", OPS:".705", KPct:16.1, bbRate:8.9,
+    avg_pct:73, ops_pct:57, sb_pct:20, bb_pct:49,
+    g_overall:"A", g_contact:"A", g_power:"D", g_discipline:"B", g_speed:"C",
+    strengths:["solid contact (.312 AVG)","most games played (18 G)"],
+    concerns:["zero extra-base hits — purely singles hitter","limited power ceiling"]
+  },
+  { name:"Brady Chadwick", num:"#3", pos:"P / CF / LF", G:16, PA:42, AB:34, R:5, H:11, "1B":9, "2B":2, "3B":0, HR:0, RBI:10, BB:4, SO:8, SB:1, HBP:2, SF:2, AVG:".324", OBP:".405", SLG:".382", OPS:".787", KPct:19.0, bbRate:9.5,
+    avg_pct:76, ops_pct:64, sb_pct:20, bb_pct:52,
+    g_overall:"A", g_contact:"A", g_power:"C", g_discipline:"B", g_speed:"C",
+    strengths:["solid contact (.324 AVG)","clutch run producer (10 RBI)","two-way player (6-0, 0.26 ERA pitching)"],
+    concerns:["swing-and-miss tendency vs. elite arms (19.0% K)"]
+  },
+  { name:"Sebastian Larios", num:"#9", pos:"SS / P", G:19, PA:65, AB:58, R:11, H:17, "1B":15, "2B":2, "3B":0, HR:0, RBI:6, BB:6, SO:9, SB:0, HBP:1, SF:0, AVG:".293", OBP:".369", SLG:".328", OPS:".697", KPct:13.8, bbRate:9.2,
+    avg_pct:68, ops_pct:56, sb_pct:0, bb_pct:51,
+    g_overall:"B", g_contact:"A", g_power:"C", g_discipline:"B", g_speed:"D",
+    strengths:["solid contact (.293 AVG)","fewest Ks relative to PA among starters","19 games played — durable"],
+    concerns:["no stolen bases — not a baserunning threat","limited power (0 HR, 0 3B)","also pitches — gets into trouble in relief role"]
+  },
+  { name:"Anthony Monsivaiz", num:"#1", pos:"CF / LF", G:14, PA:31, AB:26, R:7, H:5, "1B":5, "2B":0, "3B":0, HR:0, RBI:3, BB:4, SO:7, SB:4, HBP:0, SF:1, AVG:".192", OBP:".290", SLG:".192", OPS:".482", KPct:22.6, bbRate:12.9,
+    avg_pct:45, ops_pct:39, sb_pct:80, bb_pct:71,
+    g_overall:"C", g_contact:"C", g_power:"D", g_discipline:"B", g_speed:"A",
+    strengths:["elite speed (4 SB in 14G)","good patience (12.9% BB rate)"],
+    concerns:["swing-and-miss tendency (22.6% K)","contact struggles (.192 AVG)","limited extra-base power (0 XBH)"]
+  },
+  { name:"Lorenzo Aguirre", num:"#10", pos:"1B / P", G:14, PA:38, AB:32, R:4, H:6, "1B":4, "2B":2, "3B":0, HR:0, RBI:7, BB:5, SO:7, SB:0, HBP:0, SF:1, AVG:".188", OBP:".316", SLG:".250", OPS:".566", KPct:18.4, bbRate:13.2,
+    avg_pct:44, ops_pct:46, sb_pct:0, bb_pct:73,
+    g_overall:"C", g_contact:"C", g_power:"C", g_discipline:"B", g_speed:"D",
+    strengths:["good patience (13.2% BB rate)","clutch when contact made (7 RBI in 32 AB)"],
+    concerns:["contact struggles (.188 AVG)","not a base-running threat (0 SB)"]
+  },
+  { name:"Chris Jackson", num:"#5", pos:"2B / 3B", G:8, PA:16, AB:14, R:9, H:4, "1B":3, "2B":0, "3B":1, HR:0, RBI:0, BB:2, SO:2, SB:4, HBP:0, SF:0, AVG:".286", OBP:".375", SLG:".500", OPS:".875", KPct:12.5, bbRate:12.5,
+    avg_pct:67, ops_pct:54, sb_pct:80, bb_pct:69,
+    g_overall:"B", g_contact:"A", g_power:"D", g_discipline:"B", g_speed:"S",
+    strengths:["elite speed (4 SB in just 8G)","solid contact (.286 AVG)","good patience (12.5% BB rate)","lowest K rate among qualifiers (12.5%)"],
+    concerns:["small sample (16 PA)","0 RBI — on-base role only"]
+  },
+  { name:"Kaedyn Harris", num:"#8", pos:"RF / LF / DH", G:9, PA:19, AB:16, R:1, H:1, "1B":1, "2B":0, "3B":0, HR:0, RBI:1, BB:3, SO:9, SB:2, HBP:0, SF:0, AVG:".062", OBP:".211", SLG:".062", OPS:".273", KPct:47.4, bbRate:15.8,
+    avg_pct:14, ops_pct:22, sb_pct:40, bb_pct:87,
+    g_overall:"D", g_contact:"D", g_power:"D", g_discipline:"C", g_speed:"B",
+    strengths:["excellent patience (15.8% BB rate)","speed (2 SB in 9G)"],
+    concerns:["alarming strikeout rate (47.4% K)","contact struggles (.062 AVG)","attack in zone early — will swing and miss"]
+  },
+  { name:"Aden Edgar", num:"#20", pos:"1B / DH / RF", G:8, PA:17, AB:12, R:0, H:2, "1B":2, "2B":0, "3B":0, HR:0, RBI:6, BB:2, SO:7, SB:0, HBP:3, SF:0, AVG:".167", OBP:".353", SLG:".167", OPS:".520", KPct:41.2, bbRate:11.8,
+    avg_pct:39, ops_pct:42, sb_pct:0, bb_pct:65,
+    g_overall:"C", g_contact:"D", g_power:"D", g_discipline:"B", g_speed:"D",
+    strengths:["clutch RBI (6 RBI in 12 AB)","gets on via HBP — crowds plate"],
+    concerns:["high strikeout rate (41.2% K)","contact struggles (.167 AVG)","3 HBP — likely crowds inside part of plate"]
+  },
+  { name:"Jayce Minteer", num:"#12", pos:"LF / CF / DH", G:6, PA:14, AB:11, R:0, H:1, "1B":1, "2B":0, "3B":0, HR:0, RBI:1, BB:3, SO:6, SB:1, HBP:0, SF:0, AVG:".091", OBP:".286", SLG:".091", OPS:".377", KPct:42.9, bbRate:21.4,
+    avg_pct:21, ops_pct:31, sb_pct:20, bb_pct:100,
+    g_overall:"D", g_contact:"D", g_power:"D", g_discipline:"B", g_speed:"B",
+    strengths:["excellent patience (21.4% BB rate)","takes pitches — forces pitch counts up"],
+    concerns:["high strikeout rate (42.9% K)","contact struggles (.091 AVG)","attack in zone early — limited bat-to-ball ability"]
+  },
+  { name:"Camden Dunham", num:"#2", pos:"LF / RF", G:6, PA:12, AB:10, R:3, H:2, "1B":2, "2B":0, "3B":0, HR:0, RBI:0, BB:1, SO:4, SB:1, HBP:1, SF:0, AVG:".200", OBP:".333", SLG:".200", OPS:".533", KPct:33.3, bbRate:8.3,
+    avg_pct:47, ops_pct:43, sb_pct:20, bb_pct:46,
+    g_overall:"C", g_contact:"C", g_power:"D", g_discipline:"C", g_speed:"B",
+    strengths:["speed (1 SB in limited time)"],
+    concerns:["swing-and-miss tendency (33.3% K)","small sample (12 PA)"]
+  },
+  { name:"Aiden Gausin", num:"#21", pos:"LF / RF / C", G:7, PA:10, AB:8, R:2, H:1, "1B":1, "2B":0, "3B":0, HR:0, RBI:3, BB:2, SO:2, SB:0, HBP:0, SF:0, AVG:".125", OBP:".300", SLG:".125", OPS:".425", KPct:20.0, bbRate:20.0,
+    avg_pct:29, ops_pct:34, sb_pct:0, bb_pct:100,
+    g_overall:"D", g_contact:"C", g_power:"D", g_discipline:"B", g_speed:"D",
+    strengths:["excellent patience (20.0% BB rate)","3 RBI in just 8 AB — impact when swinging"],
+    concerns:["very small sample (10 PA)","contact struggles (.125 AVG)"]
+  },
+  { name:"Zane Pfleger", num:"#30", pos:"C / P", G:8, PA:10, AB:8, R:2, H:2, "1B":0, "2B":1, "3B":0, HR:1, RBI:2, BB:2, SO:6, SB:0, HBP:0, SF:0, AVG:".250", OBP:".400", SLG:".750", OPS:"1.150", KPct:60.0, bbRate:20.0,
+    avg_pct:58, ops_pct:93, sb_pct:0, bb_pct:100,
+    g_overall:"B", g_contact:"D", g_power:"S", g_discipline:"B", g_speed:"D",
+    strengths:["elite power (1 HR + 1 2B in just 8 AB)","excellent OPS (1.150)","excellent patience (20.0% BB rate)"],
+    concerns:["alarming strikeout rate (60.0% K) — very all-or-nothing","small sample (10 PA)"]
+  },
+  { name:"Chris Harper", num:"#15", pos:"P / C / DH", G:3, PA:3, AB:2, R:1, H:0, "1B":0, "2B":0, "3B":0, HR:0, RBI:0, BB:0, SO:0, SB:0, HBP:1, SF:0, AVG:".000", OBP:".333", SLG:".000", OPS:".333", KPct:0.0, bbRate:0.0,
+    avg_pct:0, ops_pct:27, sb_pct:0, bb_pct:0,
+    g_overall:"C", g_contact:"C", g_power:"D", g_discipline:"C", g_speed:"D",
+    strengths:["primarily a pitcher (3W, 2.89 ERA)"],
+    concerns:["insufficient batting sample (3 PA)"]
+  },
+];
+
+function gradeColor(g) {
+  return {S:'grade-S', A:'grade-A', B:'grade-B', C:'grade-C', D:'grade-D'}[g] || 'grade-C';
+}
+
+function buildScoutCards() {
+  const container = document.getElementById('scout-cards-grid');
+  if (!container) return;
+  container.className = 'scout-cards-grid';
+
+  SCOUT_DATA.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'scout-player-card';
+    card.dataset.name = p.name.toLowerCase();
+    card.dataset.ab = p.AB;
+
+    const strengthsHtml = p.strengths.length
+      ? `<div class="scout-note-row"><span class="scout-note-icon">✅</span><span class="scout-note-text"><strong>Strengths:</strong> ${p.strengths.join(', ')}.</span></div>`
+      : '';
+    const concernsHtml = p.concerns.length
+      ? `<div class="scout-note-row"><span class="scout-note-icon">⚠️</span><span class="scout-note-text"><strong>Concerns:</strong> ${p.concerns.join('; ')}.</span></div>`
+      : '';
+
+    const bbRateDisplay = p.bbRate > 0 ? p.bbRate.toFixed(1) : '0.0';
+    const bbPct = Math.min(p.bb_pct, 100);
+
+    card.innerHTML = `
+      <div class="scout-card-top-bar"></div>
+      <div class="scout-card-header">
+        <div class="scout-player-title" style="flex:1">
+          <h3>${p.num} ${p.name.toUpperCase()}</h3>
+          <div class="scout-player-meta">BATTER · ${p.G}G · ${p.PA} PA · ${p.AB} AB · ${p.pos}</div>
+          <div class="scout-grade-tags">
+            <span class="grade-tag ${gradeColor(p.g_overall)}"><span class="grade-letter">${p.g_overall}</span> · Overall</span>
+            <span class="grade-tag ${gradeColor(p.g_contact)}"><span class="grade-letter">${p.g_contact}</span> · Contact</span>
+            <span class="grade-tag ${gradeColor(p.g_power)}"><span class="grade-letter">${p.g_power}</span> · Power</span>
+            <span class="grade-tag ${gradeColor(p.g_discipline)}"><span class="grade-letter">${p.g_discipline}</span> · Discipline</span>
+            <span class="grade-tag ${gradeColor(p.g_speed)}"><span class="grade-letter">${p.g_speed}</span> · Speed</span>
+          </div>
+        </div>
+      </div>
+      <div class="scout-bars">
+        <div class="scout-bar-row">
+          <span class="scout-bar-label">AVG</span>
+          <div class="scout-bar-track"><div class="scout-bar-fill bar-avg" style="width:${p.avg_pct}%"></div></div>
+          <span class="scout-bar-pct">${p.avg_pct}%</span>
+        </div>
+        <div class="scout-bar-row">
+          <span class="scout-bar-label">OPS</span>
+          <div class="scout-bar-track"><div class="scout-bar-fill bar-ops" style="width:${p.ops_pct}%"></div></div>
+          <span class="scout-bar-pct">${p.ops_pct}%</span>
+        </div>
+        <div class="scout-bar-row">
+          <span class="scout-bar-label">SB</span>
+          <div class="scout-bar-track"><div class="scout-bar-fill bar-sb" style="width:${p.sb_pct}%"></div></div>
+          <span class="scout-bar-pct">${p.sb_pct}%</span>
+        </div>
+        <div class="scout-bar-row">
+          <span class="scout-bar-label">BB%</span>
+          <div class="scout-bar-track"><div class="scout-bar-fill bar-bb" style="width:${bbPct}%"></div></div>
+          <span class="scout-bar-pct">${bbRateDisplay}%</span>
+        </div>
+      </div>
+      <div class="scout-card-notes">
+        ${strengthsHtml}
+        ${concernsHtml}
+        <div class="scout-stat-line">
+          📋 Line: ${p.G}G–${p.PA} PA ·
+          <span>${p["2B"]} 2B</span> ·
+          <span>${p["3B"]} 3B</span> ·
+          <span>${p.HR} HR</span> ·
+          <span>${p.RBI} RBI</span> ·
+          <span>${p.BB} BB</span> ·
+          <span>${p.HBP} HBP</span> ·
+          <span>${p.SF > 0 ? p.SF + ' SAC' : '0 SAC'}</span> ·
+          <span>${p.SO} K</span> ·
+          <span>${p.SB} SB</span> ·
+          <span style="color:#f59e0b">${p.AVG} / ${p.OBP} / ${p.SLG}</span>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function filterScout() {
+  const q = (document.getElementById('scout-search')?.value || '').toLowerCase();
+  const minAB = parseInt(document.getElementById('scout-min-ab')?.value || 0);
+  document.querySelectorAll('.scout-player-card').forEach(card => {
+    const nameMatch = card.dataset.name.includes(q);
+    const abMatch = parseInt(card.dataset.ab || 0) >= minAB;
+    card.style.display = (nameMatch && abMatch) ? '' : 'none';
+  });
+}
+
+
+// ═══════════════════════════════════════════════
+// SORTING
+// ═══════════════════════════════════════════════
+
+let sortStates = {};
+
+function sortTable(tableId, colIdx, numeric) {
+  const table = document.getElementById(tableId);
+  const tbody = table.querySelector('tbody');
+  const rows = Array.from(tbody.querySelectorAll('tr:not([style*="display: none"])'));
+  const key = `${tableId}-${colIdx}`;
+  const asc = sortStates[key] !== 'asc';
+  sortStates[key] = asc ? 'asc' : 'desc';
+
+  // Clear all sort indicators
+  table.querySelectorAll('thead th').forEach(th => th.classList.remove('sorted-asc','sorted-desc'));
+  const ths = table.querySelectorAll('thead th');
+  ths[colIdx].classList.add(asc ? 'sorted-asc' : 'sorted-desc');
+
+  rows.sort((a, b) => {
+    const av = a.cells[colIdx]?.textContent.trim().replace('%','') || '';
+    const bv = b.cells[colIdx]?.textContent.trim().replace('%','') || '';
+    if (numeric) {
+      return asc ? parseFloat(av) - parseFloat(bv) : parseFloat(bv) - parseFloat(av);
+    } else {
+      return asc ? av.localeCompare(bv) : bv.localeCompare(av);
+    }
+  });
+
+  rows.forEach(r => tbody.appendChild(r));
+}
+
+// ═══════════════════════════════════════════════
+// FILTERING
+// ═══════════════════════════════════════════════
+
+function filterTable(tableId, searchId) {
+  const q = document.getElementById(searchId).value.toLowerCase();
+  const tbody = document.getElementById(tableId).querySelector('tbody');
+  tbody.querySelectorAll('tr').forEach(tr => {
+    tr.style.display = tr.dataset.name?.includes(q) ? '' : 'none';
+  });
+}
+
+function filterByPA() {
+  const min = parseInt(document.getElementById('min-pa').value) || 0;
+  const tbody = document.getElementById('bat-table').querySelector('tbody');
+  tbody.querySelectorAll('tr').forEach(tr => {
+    tr.style.display = parseInt(tr.dataset.pa || 0) >= min ? '' : 'none';
+  });
+}
+
+// ═══════════════════════════════════════════════
+// PAGE NAVIGATION
+// ═══════════════════════════════════════════════
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+buildBatting(battingData);
+buildPitching(PITCHING);
+buildSchedule();
+buildLeaders();
+buildProfiles();
+</script>
+</body>
+</html>
