@@ -1,1 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dickinson Varsity Gators — 2026 Stats Update</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a1628;
+    --blue: #1a3a6e;
+    --blue-mid: #1e4d9e;
+    --blue-bright: #2563eb;
+    --red: #c8102e;
+    --red-bright: #e31837;
+    --white: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gold: #f59e0b;
+    --green: #10b981;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-condensed: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+  }
 
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--navy); color: var(--white); font-family: var(--font-body); min-height: 100vh; }
+
+  .header {
+    background: linear-gradient(135deg, #0a1628 0%, #0f2040 50%, #0a1628 100%);
+    border-bottom: 3px solid var(--red);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: 80px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+
+  .team-info h1 { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 2px; color: var(--white); }
+  .badge-w { background: rgba(16,185,129,0.15); color: var(--green); border: 1px solid rgba(16,185,129,0.3); padding: 4px 12px; border-radius: 4px; font-family: var(--font-display); }
+
+  .content { padding: 2rem; max-width: 1400px; margin: 0 auto; }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 2px; background: linear-gradient(90deg, var(--red) 0%, transparent 100%); }
+
+  /* LEADERS GRID */
+  .leaders-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .leader-card {
+    background: linear-gradient(145deg, rgba(26,58,110,0.4), rgba(10,22,40,0.6));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 1.25rem;
+  }
+
+  .leader-value { font-family: var(--font-display); font-size: 2.4rem; color: var(--gold); }
+  .leader-player { font-family: var(--font-condensed); font-weight: 700; font-size: 1.1rem; }
+  .leader-stat-label { font-size: 0.7rem; text-transform: uppercase; color: var(--gray-400); letter-spacing: 1px; }
+
+  /* TABLES */
+  .table-wrap { overflow-x: auto; background: rgba(255,255,255,0.02); border-radius: 8px; border: 1px solid rgba(255,255,255,0.07); margin-bottom: 3rem; }
+  table { width: 100%; border-collapse: collapse; font-family: var(--font-condensed); }
+  thead th { background: rgba(26,58,110,0.8); padding: 12px; text-align: left; border-bottom: 2px solid var(--red); font-size: 0.8rem; letter-spacing: 1px; }
+  tbody td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+  /* SCOUTING CARDS */
+  .scout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .scout-card { background: #0f1a2e; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 1.5rem; }
+  .scout-card h3 { font-family: var(--font-display); border-bottom: 2px solid var(--red); padding-bottom: 5px; margin-bottom: 10px; }
+  .scout-note { font-size: 0.9rem; color: var(--gray-300); line-height: 1.4; margin-bottom: 8px; }
+  .highlight { color: var(--gold); font-weight: 700; }
+
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="team-info">
+    <h1>DICKINSON VARSITY GATORS</h1>
+    <div class="team-meta">2026 REGULAR SEASON | DISTRICT 24-6A</div>
+  </div>
+  <div class="record-badge">
+    <span class="badge-w">WIN vs LAST OPPONENT</span>
+  </div>
+</header>
+
+<div class="content">
+
+  <h2 class="section-title">FRIDAY NIGHT LEADERS</h2>
+  <div class="leaders-grid">
+    <div class="leader-card">
+      <div class="leader-stat-label">Pitching Gem</div>
+      <div class="leader-value">7.0 <span style="font-size: 1rem">IP</span></div>
+      <div class="leader-player">ISAAC RAMIREZ</div>
+      <div class="leader-sub">0 ER, 7 SO (W)</div>
+    </div>
+    <div class="leader-card">
+      <div class="leader-stat-label">Power Output</div>
+      <div class="leader-value">1 <span style="font-size: 1rem">HR</span></div>
+      <div class="leader-player">DIEGO SILVA</div>
+      <div class="leader-sub">2 RBI, 1.000 SLG</div>
+    </div>
+    <div class="leader-card">
+      <div class="leader-stat-label">Multi-Hit Game</div>
+      <div class="leader-value">2 <span style="font-size: 1rem">H</span></div>
+      <div class="leader-player">CHRISTIAN MUNOZ</div>
+      <div class="leader-sub">.500 AVG for game</div>
+    </div>
+    <div class="leader-card">
+      <div class="leader-stat-label">Plate Discipline</div>
+      <div class="leader-value">2 <span style="font-size: 1rem">BB</span></div>
+      <div class="leader-player">SEBASTIAN LARIOS</div>
+      <div class="leader-sub">1 Run Scored</div>
+    </div>
+  </div>
+
+  <h2 class="section-title">LATEST BOX SCORE SUMMARY</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>PLAYER</th>
+          <th>AB</th>
+          <th>R</th>
+          <th>H</th>
+          <th>RBI</th>
+          <th>BB</th>
+          <th>SO</th>
+          <th>EXTRA</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="player-name">Christian Munoz #7 (3B)</td>
+          <td>4</td><td>1</td><td>2</td><td>0</td><td>0</td><td>0</td><td>-</td>
+        </tr>
+        <tr>
+          <td class="player-name">Sebastian Larios #9 (SS)</td>
+          <td>2</td><td>1</td><td>0</td><td>0</td><td>2</td><td>2</td><td>-</td>
+        </tr>
+        <tr>
+          <td class="player-name">Isaac Ramirez #14 (P)</td>
+          <td>1</td><td>0</td><td>1</td><td>0</td><td>2</td><td>0</td><td>-</td>
+        </tr>
+        <tr>
+          <td class="player-name">Aydin Edison #4 (RF)</td>
+          <td>3</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>SB</td>
+        </tr>
+        <tr>
+          <td class="player-name">Diego Silva #11 (C)</td>
+          <td>2</td><td>1</td><td>1</td><td>2</td><td>0</td><td>0</td><td>HR, SF</td>
+        </tr>
+        <tr>
+          <td class="player-name">Cash Hildebrand #13 (2B)</td>
+          <td>2</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td><td>HBP, SB</td>
+        </tr>
+        <tr>
+          <td class="player-name">Brady Chadwick #3 (LF)</td>
+          <td>3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>-</td>
+        </tr>
+        <tr>
+          <td class="player-name">Chris Jackson #5 (DH)</td>
+          <td>3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>-</td>
+        </tr>
+        <tr>
+          <td class="player-name">Lorenzo Aguirre #10 (1B)</td>
+          <td>2</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>-</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="section-title">SCOUTING & ANALYTICS</h2>
+  <div class="scout-grid">
+    <div class="scout-card">
+      <h3>ISAAC RAMIREZ (P/1B)</h3>
+      <div class="scout-note"><span class="highlight">Command:</span> Masterful performance with 7.0 innings of work. Threw 81 pitches, 56 for strikes (69% Strike Rate).</div>
+      <div class="scout-note"><span class="highlight">Efficiency:</span> Faced 24 batters, allowing only 3 hits and 1 walk. Averaged 11.5 pitches per inning.</div>
+      <div class="scout-note"><span class="highlight">Dual Threat:</span> Reached base in all three plate appearances (1 H, 2 BB).</div>
+    </div>
+    <div class="scout-card">
+      <h3>OFFENSIVE TRENDS</h3>
+      <div class="scout-note"><span class="highlight">Power:</span> Diego Silva provided the highlight with a Home Run and a Sacrifice Fly, accounting for 2 of the 3 team RBIs.</div>
+      <div class="scout-note"><span class="highlight">Speed:</span> Aggressive on paths; Aydin Edison and Cash Hildebrand both successful in SB attempts.</div>
+      <div class="scout-note"><span class="highlight">Discipline:</span> Team recorded 5 BBs vs 7 SOs. Ramirez and Larios showed elite vision combining for 4 of the 5 walks.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  &copy; 2026 Dickinson Gators Baseball Analytics. Last updated: April 4, 2026.
+</footer>
+
+</body>
+</html>
